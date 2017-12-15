@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgelabz.model.Login;
 
@@ -28,15 +27,33 @@ public class LoginController {
 		
 		User user = userService.validateUser(login);
 		if (user!=null) {
+			userService.generateToken(user.getId(),"REFRESH");
+			userService.generateToken(user.getId(),"ACCESS");
+			
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-
+			
 			return new ResponseEntity<Login>(HttpStatus.OK);
 		} else {
 
 		return new ResponseEntity<Login>(HttpStatus.CONFLICT);
 		
 		}
+	}
+	
+	@RequestMapping(value = "/LoginCheck", method = RequestMethod.POST)
+	public ResponseEntity<Login> LoginCheck(@RequestBody Login login, HttpServletRequest request) {
+		User user = userService.validateUser(login);
+		if(userService.checkToken(user.getId())) {
+    	  return new ResponseEntity<Login>(HttpStatus.FOUND); 
+      }
+      else {
+    	  return new ResponseEntity<Login>(HttpStatus.LOCKED); 
+    	  
+      }
+    	  
+	
 	}
 }
 

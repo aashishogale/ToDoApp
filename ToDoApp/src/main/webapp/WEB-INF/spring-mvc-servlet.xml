@@ -15,7 +15,7 @@
 	<context:component-scan base-package="com.bridgelabz" />
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:mail.properties" />
-	
+
 
 	<mvc:annotation-driven />
 
@@ -54,17 +54,28 @@
 		<property name="host" value="${mail.smtps.host}" />
 		<property name="port" value="${mail.smtps.port}" />
 		<property name="username" value="${mail.smtps.username}" />
-		<property name="password" value="${mail.smtps.password}" /> 
+		<property name="password" value="${mail.smtps.password}" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 			</props>
-		</property> 
+		</property>
 	</bean>
-	
 
 
+	<bean id="stringSerializer"
+		class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory">
+		<property name="keySerializer" ref="stringSerializer" />
+		<property name="valueSerializer" ref="stringSerializer" />
+	</bean>
+
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:host-name="localhost" p:port="6379" />
 
 
 </beans>
