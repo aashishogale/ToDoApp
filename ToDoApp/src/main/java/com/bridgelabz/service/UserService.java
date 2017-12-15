@@ -34,5 +34,6 @@ public interface UserService {
 
 	public boolean checkEmail(String email);
    
-	public String generateToken(int id);
+	public void generateToken(int id,String type);
+	public boolean checkToken(int id);
 }
