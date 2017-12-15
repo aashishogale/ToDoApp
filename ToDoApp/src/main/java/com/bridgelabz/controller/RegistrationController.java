@@ -14,12 +14,13 @@ import com.bridgelabz.model.User;
 import com.bridgelabz.service.UserService;
 
 @RestController
+@RequestMapping("/user")
 public class RegistrationController {
 
 	@Autowired
 	public UserService userService;
 
-	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
+	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public ResponseEntity<User> register(@RequestBody User user, HttpServletRequest request) {
 
 		System.out.println(user.getEmail()+user.getFname()+user.getNumber()+user.getPassword());
