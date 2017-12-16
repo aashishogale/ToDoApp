@@ -29,17 +29,22 @@ public class UserController {
 	public ResponseEntity<User> register(@RequestBody User user, HttpServletRequest request) {
 
 		System.out.println(user.getEmail()+user.getFname()+user.getNumber()+user.getPassword());
-		if (userService.register(user, request)) {
+		try {
+			if (userService.register(user, request)) {
+	            logger.info("save confirmed");
+				HttpSession session = request.getSession(true);
 
-			HttpSession session = request.getSession(true);
+				session.setAttribute("message", "session created");
 
-			session.setAttribute("message", "session created");
+				return new ResponseEntity<User>(HttpStatus.OK);
 
-			return new ResponseEntity<User>(HttpStatus.OK);
-
-		} else {
-			System.out.print("error in registration");
-			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+			} else {
+				System.out.print("error in registration");
+				return new ResponseEntity<User>(HttpStatus.CONFLICT);
+			}
+		} catch (Exception e) {
+			System.out.println("Shit...!!!");
+			return new ResponseEntity<User>(HttpStatus.BAD_GATEWAY);
 		}
 
 	}

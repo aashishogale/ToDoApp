@@ -8,7 +8,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd 
-        http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+        http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
 
 
@@ -16,7 +17,12 @@
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:mail.properties" />
 
+	<task:executor id="executorService" pool-size="10"/>
+	
+	<!-- <bean id="mailSetter" class="com.bridgelabz.controller.MailSetter"></bean> -->
 
+	<task:annotation-driven executor="executorService" />
+	
 	<mvc:annotation-driven />
 
 	<mvc:resources location="/css/" mapping="/css/**" />

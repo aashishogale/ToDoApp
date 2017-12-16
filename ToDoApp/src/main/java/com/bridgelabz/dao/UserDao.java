@@ -19,6 +19,5 @@ public interface UserDao {
 	 */
 	public User validateUser(Login login);
 
-;
 
 }

@@ -21,24 +21,24 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	DataSource datasource;
-	
+
 	@Autowired
 	BCryptPasswordEncoder encryptor;
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	public boolean register(User user) {
-		
 
 		String password = encryptor.encode(user.getPassword());
 		user.setPassword(password);
 		Session session = sessionFactory.openSession();
 
 		session.beginTransaction();
-		
+
 		session.save(user);
-		System.out.println("Inserted Successfully");
+
 		session.getTransaction().commit();
+		System.out.println("Inserted Successfully");
 		session.close();
 		return true;
 	}
@@ -50,10 +50,8 @@ public class UserDaoImpl implements UserDao {
 		session.beginTransaction();
 		Query<User> query = session.createQuery("from User");
 		List<User> users = query.getResultList();
-		for (User user: users) {
-			
-		
-			
+		for (User user : users) {
+
 			if (user.getEmail().equals(login.getEmail())
 					&& encryptor.matches(login.getPassword(), user.getPassword())) {
 				return user;
@@ -64,12 +62,21 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
-	
+	public User getUserById(int id) {
+		Session session = sessionFactory.openSession();
+		// getting transaction object from session object
+		session.beginTransaction();
+		Query<User> query = session.createQuery("from User");
+		List<User> users = query.getResultList();
+		for (User user : users) {
 
+			if (user.getId() == id) {
+				return user;
+			}
 
+		}
+		logger.warn("user not present");
+		return null;
+	}
 
-
-
-	
-	
 }

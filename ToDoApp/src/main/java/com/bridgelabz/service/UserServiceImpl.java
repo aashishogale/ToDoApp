@@ -31,6 +31,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private MailSender mailSender;
+
+	@Autowired
+	private MailSetter mailSetter;
+
 	private static final Logger logger = Logger.getLogger(UserService.class);
 	private static String key = "QwErTyUiOp";
 
@@ -38,18 +42,14 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(rollbackFor = Exception.class)
 	public boolean register(User user, HttpServletRequest request) {
-		try {
-			boolean saved = userDao.register(user);
 
-			MailSetter mailSetter = new MailSetter();
-			mailSetter.setMailSender(mailSender);
-			mailSetter.sendMail(user.getEmail());
+		mailSetter.sendMail(user.getEmail());
+		logger.info("mail sent");
+		boolean saved = userDao.register(user);
+		logger.info("user saved");
 
-			return saved;
-		} catch (Exception ie) {
-			logger.warn("invalid information");
-		}
-		return false;
+		return saved;
+
 	}
 
 	@Transactional
@@ -75,8 +75,6 @@ public class UserServiceImpl implements UserService {
 		return false;
 
 	}
-
-
 
 	public String generateToken(int id) {
 
