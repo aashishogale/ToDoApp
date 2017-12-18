@@ -41,12 +41,14 @@ public class UserServiceImpl implements UserService {
 	public static HashMap<String, Integer> hm = new HashMap<String, Integer>();
 
 	@Transactional(rollbackFor = Exception.class)
-	public boolean register(User user, HttpServletRequest request) {
-
-		mailSetter.sendMail(user.getEmail());
-		logger.info("mail sent");
+	public boolean register(User user) {
 		boolean saved = userDao.register(user);
 		logger.info("user saved");
+
+		mailSetter.sendMail(user.getEmail());
+		userDao.updateVerifyUser(user);
+
+		logger.info("mail sent");
 
 		return saved;
 

@@ -29,7 +29,9 @@ public class MailSetter {
 		message.setSubject("welcome mail");
 		message.setText("you have been verified");
 		mailSender.send(message);
+		
 		System.out.println("mail sent");
+		
 	}
 
 	public void sendOtp(String to, int otp) {

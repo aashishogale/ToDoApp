@@ -17,7 +17,7 @@ public interface UserService {
 	 * @purpose register the user
 	 * 
 	 */
-	public boolean register(User user, HttpServletRequest request);
+	public boolean register(User user);
 
 	/**
 	 * @param login

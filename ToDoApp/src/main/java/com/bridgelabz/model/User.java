@@ -18,15 +18,18 @@ public class User {
 	@Column(name = "id")
 	@NotNull
 	private int id;
-
-	public int getId() {
-		return id;
+	
+	public boolean isVerified() {
+		return isVerified;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 
+	@NotNull
+	@Column(name = "isVerified")
+	private boolean isVerified;
 	@NotNull
 	@Column(name = "name")
 	private String fname;
@@ -74,6 +77,16 @@ public class User {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
