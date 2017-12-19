@@ -47,6 +47,7 @@ public class UserController {
 
 	}
 
+	
 	@RequestMapping(value = "Login", method = RequestMethod.POST)
 	public ResponseEntity<CustomResponse> Login(@RequestBody Login login, HttpServletRequest request) {
 
@@ -56,7 +57,7 @@ public class UserController {
 			String token = userService.generateToken(user.getId());
 
 			System.out.print(token);
-
+            request.setAttribute("token", token);
 			response.setMessage(token);
 			response.setCode(1);
 

@@ -78,17 +78,18 @@ public class UserDaoImpl implements UserDao {
 		logger.warn("user not present");
 		return null;
 	}
+
 	public User updateVerifyUser(User user) {
 		Session session = sessionFactory.openSession();
-		   session.beginTransaction();
-		   User updatedUser = (User)session.get(User.class, user.getId());
-		   updatedUser.setVerified(true);
-		   session.save(updatedUser);
-		   System.out.println("Updated Successfully");
-		   session.getTransaction().commit();
-		   
-		   sessionFactory.close();
-		   return user;
+		session.beginTransaction();
+		User updatedUser = (User) session.get(User.class, user.getId());
+		updatedUser.setVerified(true);
+		session.save(updatedUser);
+		System.out.println("Updated Successfully");
+		session.getTransaction().commit();
+
+		sessionFactory.close();
+		return user;
 	}
 
 }

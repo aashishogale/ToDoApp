@@ -1,14 +1,19 @@
 package com.bridgelabz.model;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
 @Table(name = "User")
@@ -19,13 +24,7 @@ public class User {
 	@NotNull
 	private int id;
 	
-	public boolean isVerified() {
-		return isVerified;
-	}
-
-	public void setVerified(boolean isVerified) {
-		this.isVerified = isVerified;
-	}
+	
 
 	@NotNull
 	@Column(name = "isVerified")
@@ -46,6 +45,26 @@ public class User {
 
 	@Column(name = "number")
 	private String number;
+	
+	@OneToMany
+	@JoinColumn(name="noteId")
+	private Collection<Note> notes =new ArrayList<Note>();
+	
+	public Collection<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(Collection<Note> notes) {
+		this.notes = notes;
+	}
+
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
 
 	public String getFname() {
 		return fname;
