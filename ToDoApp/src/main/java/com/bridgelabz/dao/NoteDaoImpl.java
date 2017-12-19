@@ -1,12 +1,12 @@
 package com.bridgelabz.dao;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,16 +19,12 @@ public class NoteDaoImpl implements NoteDao {
 	private SessionFactory sessionFactory;
 	@Autowired
 	DataSource datasource;
-	Collection<Note> noteList;
 
 	public void createNote(User user, Note note) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		User updatedUser = (User) session.get(User.class, user.getId());
-		noteList = new ArrayList<Note>();
-		noteList.add(note);
-		updatedUser.setNotes(noteList);
-		session.save(updatedUser);
+		note.setUser(user);
+		session.save(note);
 		session.getTransaction().commit();
 		session.close();
 
@@ -47,13 +43,24 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note updatedNote = (Note) session.get(Note.class, note.getId());
-		updatedNote.setDescription(note.de);(true);
-		session.save(updatedUser);
+		updatedNote.setDescription(note.getDescription());
+		updatedNote.setDate(note.getDate());
+		updatedNote.setTitle(note.getTitle());
+		session.save(updatedNote);
 		System.out.println("Updated Successfully");
 		session.getTransaction().commit();
+		session.close();
 
-		sessionFactory.close();
-		return user;
+	}
+
+	public List<Note> getNoteList(User user) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query<Note> query = session.createQuery("from Note where userid=:id");
+		query.setParameter("id", user.getId());
+		List<Note> notes = query.getResultList();
+		return notes;
+
 	}
 
 }

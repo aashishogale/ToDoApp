@@ -32,4 +32,5 @@ public interface UserService {
 	public String generateToken(int id);
 
 	public int checkToken(String token);
+	public User getUserById(int id);
 }

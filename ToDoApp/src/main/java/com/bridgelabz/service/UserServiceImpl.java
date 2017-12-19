@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private MailSetter mailSetter;
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
 
 	private static final Logger logger = Logger.getLogger(UserService.class);
 	private static String key = "QwErTyUiOp";
@@ -78,24 +81,37 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	public String generateToken(int id) {
+	
 
+	public User getUserById(int id) {
+		return userDao.getUserById(id);
+	}
+
+	public String generateToken(int id) {
 		long currentTime = System.currentTimeMillis();
 		Date currentDate = new Date(currentTime);
 		System.out.println(currentDate);
-		String generatedToken = Jwts.builder().setId(Integer.toString(id)).setIssuedAt(currentDate)
+		String token = Jwts.builder().setId(Integer.toString(id)).setIssuedAt(currentDate)
 				.signWith(SignatureAlgorithm.HS256, key).compact();
-		return generatedToken;
+
+		redisTemplate.setEnableTransactionSupport(true);
+
+		redisTemplate.opsForValue().set(Integer.toString(id), token);
+		logger.info("accesstoken created");
+		return token;
 
 	}
 
 	public int checkToken(String token) {
+
+		//String token = (String) redisTemplate.opsForValue().get(Integer.toString(id));
+
 		int id = 0;
 		Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
 		System.out.println("ID: " + claims.getId());
 		id = Integer.parseInt(claims.getId());
+		
 		return id;
-
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.bridgelabz.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,9 @@ public class UserController {
 	private static final Logger logger = Logger.getLogger("UserController");
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public ResponseEntity<User> register(@RequestBody User user, HttpServletRequest request) {
+	public ResponseEntity<User> register(@RequestBody User user) {
 
-		System.out.println(user.getEmail() + user.getFname() + user.getNumber() + user.getPassword());
+		logger.info(user.getEmail() + user.getFname() + user.getNumber() + user.getPassword());
 		try {
 			if (userService.register(user)) {
 				logger.info("save confirmed");

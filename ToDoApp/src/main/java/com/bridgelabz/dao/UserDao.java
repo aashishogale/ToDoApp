@@ -1,6 +1,5 @@
 package com.bridgelabz.dao;
 
-
 import com.bridgelabz.model.Login;
 import com.bridgelabz.model.User;
 
@@ -18,6 +17,9 @@ public interface UserDao {
 	 * @purpose validate the user
 	 */
 	public User validateUser(Login login);
-    public User updateVerifyUser(User user);
+
+	public User updateVerifyUser(User user);
+
+	public User getUserById(int id);
 
 }
