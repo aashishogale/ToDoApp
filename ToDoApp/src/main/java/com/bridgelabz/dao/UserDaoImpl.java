@@ -1,16 +1,14 @@
 package com.bridgelabz.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -23,34 +21,37 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	DataSource datasource;
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+
 	@Autowired
 	BCryptPasswordEncoder encryptor;
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public boolean register(User user) {
-		String sql = "insert into register1(name,password,email,mobile) values(?,?,?,?)";
 
 		String password = encryptor.encode(user.getPassword());
-		int a = jdbcTemplate.update(sql,
-				new Object[] { user.getFname(), password, user.getEmail(),user.getNumber() });
-		if (a == 0) {
-			logger.warn("registration unsuccesful");
-			return false;
+		user.setPassword(password);
+		Session session = sessionFactory.openSession();
 
-		} else {
-			logger.info("registration successful");
-			return true;
-		}
+		session.beginTransaction();
+
+		session.save(user);
+
+		session.getTransaction().commit();
+		System.out.println("Inserted Successfully");
+		session.close();
+		return true;
 	}
 
 	public User validateUser(Login login) {
 
-		String sql = "select * from register1";
-		List<User> users = jdbcTemplate.query(sql, new UserMapper());
-		Iterator<User> itr = users.iterator();
-		while (itr.hasNext()) {
-			User user = itr.next();
+		Session session = sessionFactory.openSession();
+		// getting transaction object from session object
+		session.beginTransaction();
+		Query<User> query = session.createQuery("from User");
+		List<User> users = query.getResultList();
+		for (User user : users) {
+
 			if (user.getEmail().equals(login.getEmail())
 					&& encryptor.matches(login.getPassword(), user.getPassword())) {
 				return user;
@@ -61,45 +62,34 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
-	public boolean checkEmail(String email) {
+	public User getUserById(int id) {
+		Session session = sessionFactory.openSession();
+		// getting transaction object from session object
+		session.beginTransaction();
+		Query<User> query = session.createQuery("from User");
+		List<User> users = query.getResultList();
+		for (User user : users) {
 
-		String sql = "select * from register1";
-		List<User> users = jdbcTemplate.query(sql, new UserMapper());
-		Iterator<User> itr = users.iterator();
-		while (itr.hasNext()) {
-			User user = itr.next();
-			if (user.getEmail().equals(email)) {
-				return true;
+			if (user.getId() == id) {
+				return user;
 			}
 
 		}
 		logger.warn("user not present");
-		return false;
+		return null;
 	}
 
-	public void changePassword(String email, String password) {
-		String enpassword = encryptor.encode(password);
+	public User updateVerifyUser(User user) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		User updatedUser = (User) session.get(User.class, user.getId());
+		updatedUser.setVerified(true);
+		session.save(updatedUser);
+		System.out.println("Updated Successfully");
+		session.getTransaction().commit();
 
-		String sql = "update register1 set password='" + enpassword + "' where email='" + email + "'";
-		jdbcTemplate.update(sql);
-
-	}
-
-}
-
-class UserMapper implements RowMapper<User> {
-	public User mapRow(ResultSet rs, int arg1) throws SQLException {
-		User user = new User();
-
-		user.setPassword(rs.getString("password"));
-		user.setFname(rs.getString("name"));
-	
-		user.setEmail(rs.getString("email"));
-	
-
+		sessionFactory.close();
 		return user;
 	}
 
-	
-	
 }

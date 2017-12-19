@@ -1,7 +1,6 @@
 package com.bridgelabz.service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.JWindow;
 
 import com.bridgelabz.model.Login;
 import com.bridgelabz.model.User;
@@ -18,7 +17,7 @@ public interface UserService {
 	 * @purpose register the user
 	 * 
 	 */
-	public boolean register(User user, HttpServletRequest request);
+	public boolean register(User user);
 
 	/**
 	 * @param login
@@ -30,10 +29,7 @@ public interface UserService {
 
 	public boolean validateOtp(String email, int otp);
 
-	public void changePassword(String email, String password);
+	public String generateToken(int id);
 
-	public boolean checkEmail(String email);
-   
-	public void generateToken(int id,String type);
-	public boolean checkToken(int id);
+	public int checkToken(String token);
 }

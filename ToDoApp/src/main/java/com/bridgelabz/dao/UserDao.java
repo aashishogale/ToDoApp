@@ -18,9 +18,6 @@ public interface UserDao {
 	 * @purpose validate the user
 	 */
 	public User validateUser(Login login);
-
-	public void changePassword(String email, String password);
-
-	public boolean checkEmail(String email);
+    public User updateVerifyUser(User user);
 
 }
