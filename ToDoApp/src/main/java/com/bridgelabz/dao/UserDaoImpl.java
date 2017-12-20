@@ -32,15 +32,19 @@ public class UserDaoImpl implements UserDao {
 		String password = encryptor.encode(user.getPassword());
 		user.setPassword(password);
 		Session session = sessionFactory.openSession();
+		if (this.getUserByEmail(user.getEmail()) == null) {
+			session.beginTransaction();
 
-		session.beginTransaction();
+			session.save(user);
 
-		session.save(user);
+			session.getTransaction().commit();
+			System.out.println("Inserted Successfully");
+			session.close();
+			return true;
+		} else {
+			return false;
 
-		session.getTransaction().commit();
-		System.out.println("Inserted Successfully");
-		session.close();
-		return true;
+		}
 	}
 
 	public User validateUser(Login login) {
@@ -52,8 +56,8 @@ public class UserDaoImpl implements UserDao {
 		List<User> users = query.getResultList();
 		for (User user : users) {
 
-			if (user.getEmail().equals(login.getEmail())
-					&& encryptor.matches(login.getPassword(), user.getPassword())) {
+			if (user.getEmail().equals(login.getEmail()) && encryptor.matches(login.getPassword(), user.getPassword())
+					&& user.isVerified()) {
 				return user;
 			}
 
@@ -79,6 +83,22 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	public User getUserByEmail(String email) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query<User> query = session.createQuery("from User");
+		List<User> users = query.getResultList();
+		for (User user : users) {
+
+			if (user.getEmail().equals(email)) {
+				return user;
+			}
+
+		}
+		logger.warn("user not present");
+		return null;
+	}
+
 	public User updateVerifyUser(User user) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -88,7 +108,6 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("Updated Successfully");
 		session.getTransaction().commit();
 
-		sessionFactory.close();
 		return user;
 	}
 

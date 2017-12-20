@@ -1,7 +1,5 @@
 package com.bridgelabz.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.bridgelabz.model.Login;
 import com.bridgelabz.model.User;
 
@@ -31,6 +29,11 @@ public interface UserService {
 
 	public String generateToken(int id);
 
-	public int checkToken(String token);
+	public boolean checkToken(String token);
+
+	public int getidbyToken(String token);
+
 	public User getUserById(int id);
+
+	public void updateVerifyUser(User user);
 }

@@ -1,9 +1,8 @@
 package com.bridgelabz.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +44,14 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(rollbackFor = Exception.class)
 	public boolean register(User user) {
+		user.setVerified(false);
 		boolean saved = userDao.register(user);
 		logger.info("user saved");
+		if (saved == true) {
+			mailSetter.sendMail(user.getEmail());
+			logger.info("mail sent");
 
-		mailSetter.sendMail(user.getEmail());
-		userDao.updateVerifyUser(user);
-
-		logger.info("mail sent");
+		}
 
 		return saved;
 
@@ -81,37 +81,55 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	
-
 	public User getUserById(int id) {
 		return userDao.getUserById(id);
 	}
 
 	public String generateToken(int id) {
 		long currentTime = System.currentTimeMillis();
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.HOUR, 2);
+
 		Date currentDate = new Date(currentTime);
+		Date expirationDate = cal.getTime();
 		System.out.println(currentDate);
-		String token = Jwts.builder().setId(Integer.toString(id)).setIssuedAt(currentDate)
+		String token = Jwts.builder().setId(Integer.toString(id)).setExpiration(expirationDate).setIssuedAt(currentDate)
 				.signWith(SignatureAlgorithm.HS256, key).compact();
 
 		redisTemplate.setEnableTransactionSupport(true);
 
 		redisTemplate.opsForValue().set(Integer.toString(id), token);
-		logger.info("accesstoken created");
+
 		return token;
 
 	}
 
-	public int checkToken(String token) {
-
-		//String token = (String) redisTemplate.opsForValue().get(Integer.toString(id));
+	public boolean checkToken(String token) {
 
 		int id = 0;
 		Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
 		System.out.println("ID: " + claims.getId());
 		id = Integer.parseInt(claims.getId());
-		
+		if (userDao.getUserById(id) != null)
+			return true;
+		else
+			return false;
+	}
+
+	public int getidbyToken(String token) {
+		int id = 0;
+		Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+		System.out.println("ID: " + claims.getId());
+		id = Integer.parseInt(claims.getId());
 		return id;
+	}
+
+	@Transactional
+	public void updateVerifyUser(User user) {
+		userDao.updateVerifyUser(user);
+
 	}
 
 }

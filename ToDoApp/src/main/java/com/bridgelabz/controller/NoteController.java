@@ -30,35 +30,58 @@ public class NoteController {
 	public ResponseEntity<Note> createNote(@RequestBody Note note, HttpServletRequest request) {
 
 		String token = (String) request.getHeader("token");
-		
-		int id = userService.checkToken(token);
-		User user = userService.getUserById(id);
-		noteService.createNote(user, note);
-		return new ResponseEntity<Note>(HttpStatus.OK);
 
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			User user = userService.getUserById(id);
+			noteService.createNote(user, note);
+			return new ResponseEntity<Note>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Note>(HttpStatus.CONFLICT);
+		}
 	}
 
 	@RequestMapping(value = "updatenote", method = RequestMethod.POST)
 	public ResponseEntity<Note> updateNote(@RequestBody Note note, HttpServletRequest request) {
-
-		noteService.updateNote(note);
-		return new ResponseEntity<Note>(note,HttpStatus.OK);
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			noteService.updateNote(note);
+			return new ResponseEntity<Note>(note, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Note>(HttpStatus.CONFLICT);
+		}
 
 	}
 
 	@RequestMapping(value = "deletenote", method = RequestMethod.POST)
 	public ResponseEntity<Note> deleteNote(@RequestBody Note note, HttpServletRequest request) {
-
-		noteService.deleteNote(note);
-		return new ResponseEntity<Note>(note,HttpStatus.OK);
-
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			noteService.deleteNote(note);
+			return new ResponseEntity<Note>(note, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Note>(HttpStatus.CONFLICT);
+		}
 	}
-	
-	@RequestMapping(value="returnnotelist",method=RequestMethod.POST)
-	public ResponseEntity<List<Note>> getAllNotes(@RequestBody User user){
-		
-		 return new ResponseEntity<List<Note>>(noteService.getNoteList(user),HttpStatus.OK);
-		
+
+	@RequestMapping(value = "returnnotelist", method = RequestMethod.POST)
+	public ResponseEntity<List<Note>> getAllNotes(@RequestBody User user, HttpServletRequest request) {
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			return new ResponseEntity<List<Note>>(noteService.getNoteList(user), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<Note>>(HttpStatus.CONFLICT);
+		}
+	}
+
+	@RequestMapping(value = "getnotebyid", method = RequestMethod.POST)
+	public ResponseEntity<Note> getAllNotes(@RequestBody Note note, HttpServletRequest request) {
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			return new ResponseEntity<Note>(noteService.getNotebyId(note.getId()), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Note>(HttpStatus.CONFLICT);
+		}
 	}
 
 }

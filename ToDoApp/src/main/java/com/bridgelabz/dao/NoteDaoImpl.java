@@ -63,4 +63,12 @@ public class NoteDaoImpl implements NoteDao {
 
 	}
 
+	public Note getNotebyId(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		
+		return note;
+	}
+
 }

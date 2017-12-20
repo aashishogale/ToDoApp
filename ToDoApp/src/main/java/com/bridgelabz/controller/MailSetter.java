@@ -44,5 +44,17 @@ public class MailSetter {
 		message.setText(Integer.toString(otp));
 		mailSender.send(message);
 	}
+	@Async
+	public void sendUrl(String url) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		String to="aashishogale9@gmail.com";
+		message.setFrom("website");
+		message.setTo(to);
+		message.setSubject("Click on the  link");
+		message.setText(url);
+		mailSender.send(message);
+		
+	}
+	
 
 }
