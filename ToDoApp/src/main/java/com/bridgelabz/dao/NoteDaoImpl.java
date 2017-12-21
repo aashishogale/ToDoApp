@@ -1,9 +1,11 @@
 package com.bridgelabz.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,6 +21,7 @@ public class NoteDaoImpl implements NoteDao {
 	private SessionFactory sessionFactory;
 	@Autowired
 	DataSource datasource;
+	private static final Logger logger = Logger.getLogger("NoteDaoImpl");
 
 	public void createNote(User user, Note note) {
 		Session session = sessionFactory.openSession();
@@ -67,8 +70,72 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-		
+
 		return note;
 	}
 
+	public void pinNote(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+	
+		note.setPin(!(note.isPin()));
+	
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
+	public void trashNote(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		note.setPin(!(note.isTrash()));
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public void archiveNote(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		note.setPin(!(note.isArchive()));
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
+	public void setReminder(int id, Date reminder) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		note.setReminder(reminder);
+		logger.info(note.getReminder());
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+
+		
+	}
+
+	public void deleteReminder(int id) {
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		note.setReminder(null);
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	public void setColor(int id,String color) {
+		
+	}
+
+	
+	
 }

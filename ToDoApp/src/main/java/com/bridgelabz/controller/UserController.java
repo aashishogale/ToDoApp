@@ -125,4 +125,10 @@ public class UserController {
 			return new ResponseEntity<String>("Token expired", HttpStatus.CONFLICT);
 		}
 	}
+	
+	
+	  @RequestMapping(value = "/", method = RequestMethod.GET)
+	    public String root() {
+	        return "register";
+	    }
 }

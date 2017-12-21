@@ -29,6 +29,58 @@ public class Note {
 	@JoinColumn(name = "userid")
 	private User user;
 
+	@Column(name="pin")
+	private boolean pin;
+	
+	@Column(name="archive")
+	private boolean archive;
+	@Column(name="trash")
+	private boolean trash;
+	@Column(name="reminder")
+	private Date reminder;
+	
+	@Column(name="color")
+	private String color;
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public boolean isPin() {
+		return pin;
+	}
+
+	public void setPin(boolean pin) {
+		this.pin = pin;
+	}
+
+	public boolean isArchive() {
+		return archive;
+	}
+
+	public void setArchive(boolean archive) {
+		this.archive = archive;
+	}
+
+	public boolean isTrash() {
+		return trash;
+	}
+
+	public void setTrash(boolean trash) {
+		this.trash = trash;
+	}
+
+	public Date getReminder() {
+		return reminder;
+	}
+
+	public void setReminder(Date reminder) {
+		this.reminder = reminder;
+	}
+
 	public User getUser() {
 		return user;
 	}

@@ -1,6 +1,5 @@
 package com.bridgelabz.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -12,8 +11,6 @@ public class MailSetter {
 
 	@Autowired
 	private MailSender mailSender;
-	
-	
 
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
@@ -29,9 +26,9 @@ public class MailSetter {
 		message.setSubject("welcome mail");
 		message.setText("you have been verified");
 		mailSender.send(message);
-		
+
 		System.out.println("mail sent");
-		
+
 	}
 
 	public void sendOtp(String to, int otp) {
@@ -44,17 +41,17 @@ public class MailSetter {
 		message.setText(Integer.toString(otp));
 		mailSender.send(message);
 	}
+
 	@Async
 	public void sendUrl(String url) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		String to="aashishogale9@gmail.com";
+		String to = "aashishogale9@gmail.com";
 		message.setFrom("website");
 		message.setTo(to);
 		message.setSubject("Click on the  link");
 		message.setText(url);
 		mailSender.send(message);
-		
+
 	}
-	
 
 }

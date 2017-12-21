@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		cal.add(Calendar.HOUR, 2);
+		cal.add(Calendar.HOUR, 10);
 
 		Date currentDate = new Date(currentTime);
 		Date expirationDate = cal.getTime();

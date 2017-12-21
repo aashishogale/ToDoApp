@@ -1,16 +1,32 @@
 package com.bridgelabz.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.bridgelabz.model.Note;
 import com.bridgelabz.model.User;
 
 public interface NoteDao {
-	public void createNote(User user,Note note);
+	public void createNote(User user, Note note);
+
 	public void deleteNote(Note note);
+
 	public void updateNote(Note note);
+
 	public List<Note> getNoteList(User user);
+
 	public Note getNotebyId(int id);
 
+	public void pinNote(int id);
+
+	public void trashNote(int id);
+
+	public void archiveNote(int id);
+
+	public void setReminder(int id, Date date);
+
+	public void deleteReminder(int id);
+
+	public void setColor(int id, String color);
 
 }

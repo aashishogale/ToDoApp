@@ -42,4 +42,33 @@ public class NoteServiceImpl implements NoteService {
 		return notedao.getNotebyId(id);
 	}
 
+	public void pinNote(int id) {
+		notedao.pinNote(id);
+
+	}
+
+	public void trashNote(int id) {
+		notedao.trashNote(id);
+
+	}
+
+	public void archiveNote(int id) {
+		notedao.archiveNote(id);
+
+	}
+
+	public void setReminder(int id, Date reminder) {
+		notedao.setReminder(id, reminder);
+	}
+
+	public void deleteReminder(int id) {
+		notedao.deleteReminder(id);
+
+	}
+
+	public void setColor(int id, String color) {
+		notedao.setColor(id, color);
+
+	}
+
 }
