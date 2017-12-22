@@ -27,6 +27,10 @@
 
 	<mvc:resources location="/css/" mapping="/css/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/service/" mapping="/service/**" />
+	<mvc:resources location="/controller/" mapping="/controller/**" />
+	<mvc:resources location="/script/" mapping="/script/**" />
+	<mvc:resources location="/template/" mapping="/template/**" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="encryptor"
