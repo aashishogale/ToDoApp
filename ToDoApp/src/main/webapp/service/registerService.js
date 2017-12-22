@@ -8,7 +8,7 @@ toDo.factory('registerService', function($http, $location) {
 	details.registerUser = function(user) {
 		return $http({
 			method : "POST",
-			url : 'Register',
+			url : "user/register",
 			data : user
 		})
 	}

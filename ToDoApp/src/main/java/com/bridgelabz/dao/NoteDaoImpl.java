@@ -133,6 +133,14 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	public void setColor(int id,String color) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		note.setColor(color);
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+		
 		
 	}
 

@@ -10,11 +10,17 @@ ToDo.config([ '$stateProvider', '$urlRouterProvider',
 
 			})
 
-		/*	state('login', {
+			.state('login', {
 				url : '/login',
 				templateUrl : 'template/Login.html',
-
-			})*/
-			$urlRouterProvider.otherwise('/register');
+                controller:'loginController'
+			})
+			
+			.state('home', {
+				url : '/home',
+				templateUrl : 'template/home.html'
+            
+			})
+			$urlRouterProvider.otherwise('register');
 
 		} ]);

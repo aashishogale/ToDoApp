@@ -12,7 +12,9 @@
 
 <script type="text/javascript" src="script/ToDo.js"></script>
 <script type="text/javascript" src="controller/registerController.js"></script>
+<script type="text/javascript" src="controller/loginController.js"></script>
 <script type="text/javascript" src="service/registerService.js"></script>
+<script type="text/javascript" src="service/loginService.js"></script>
 
 </head>
 <body ng-app="ToDo">

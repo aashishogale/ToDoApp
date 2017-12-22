@@ -10,19 +10,19 @@
 	<form action="">
 		<div class="container">
 			<label><b>Name</b></label> <input type="text"
-				placeholder="Enter name" name=required>
+				placeholder="Enter name" name="name" ng-model="user.fname">
 				
 				 <label><b>Email</b></label>
 			<input type="text" placeholder="Enter Email" name="email" required ng-model="user.email">
 
 			<label><b>Password</b></label> <input type="password"
-				placeholder="Enter Password" name="psw" required> 
+				placeholder="Enter Password" name="psw" required ng-model="user.password"> 
 				<label><b>Number</b></label>
-			<input type="text" placeholder="Enter name" name=required> <label><b>Password</b></label>
+			<input type="text" placeholder="Enter name" name="number" ng-model="user.number"> <label><b>Password</b></label>
 			
 			<div class="clearfix">
-				<button type="button" class="cancelbtn">Cancel</button>
-				<button type="submit" class="signupbtn">Sign Up</button>
+			<a href="#!/login">	<button type="button" class="cancelbtn">Sign in</button></a>
+				<button type="submit" class="signupbtn" ng-click="registerUser()">Sign Up</button>
 			</div>
 		</div>
 	</form>
