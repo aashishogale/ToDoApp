@@ -21,6 +21,6 @@ ToDo.config([ '$stateProvider', '$urlRouterProvider',
 				templateUrl : 'template/home.html'
             
 			})
-			$urlRouterProvider.otherwise('register');
+			$urlRouterProvider.otherwise('login');
 
 		} ]);

@@ -21,5 +21,7 @@ public interface UserDao {
 	public User updateVerifyUser(User user);
 
 	public User getUserById(int id);
+	 
+	
 
 }

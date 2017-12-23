@@ -1,6 +1,5 @@
 package com.bridgelabz.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +18,7 @@ public class User {
 	@Column(name = "id")
 	@NotNull
 	private int id;
-	
-	
 
-	
 	@Column(name = "isVerified")
 	private boolean isVerified;
 	@NotNull
@@ -34,16 +30,12 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@NotNull
-	@Size(min = 8)
+
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "number")
 	private String number;
-	
-
-	
 
 	public boolean isVerified() {
 		return isVerified;
@@ -84,8 +76,6 @@ public class User {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-
-	
 
 	public int getId() {
 		return id;

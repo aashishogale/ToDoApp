@@ -15,7 +15,7 @@
 <script type="text/javascript" src="controller/loginController.js"></script>
 <script type="text/javascript" src="service/registerService.js"></script>
 <script type="text/javascript" src="service/loginService.js"></script>
-
+<link type="text/css" rel="stylesheet" href="css/register.css" />
 </head>
 <body ng-app="ToDo">
 	<div ui-view></div>

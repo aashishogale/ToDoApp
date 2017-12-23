@@ -1,8 +1,13 @@
 package com.bridgelabz.controller;
 
+import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
@@ -13,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bridgelabz.dao.UserDao;
 import com.bridgelabz.model.CustomResponse;
 import com.bridgelabz.model.Login;
 import com.bridgelabz.model.User;
 import com.bridgelabz.service.UserService;
+import com.bridgelabz.util.FBConnection;
+import com.bridgelabz.util.FbGraph;
 
 @RestController
 @RequestMapping("/user")
@@ -28,6 +36,10 @@ public class UserController {
 	private MailSetter mailSetter;
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
+	@Autowired
+	private FBConnection fbconnection;
+	@Autowired
+	UserDao userDao;
 	private static final Logger logger = Logger.getLogger("UserController");
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
@@ -125,7 +137,32 @@ public class UserController {
 			return new ResponseEntity<String>("Token expired", HttpStatus.CONFLICT);
 		}
 	}
+    
+	@RequestMapping(value="fbConnect",method=RequestMethod.GET)
+	public ResponseEntity<String> fbConnect(HttpServletResponse response) throws IOException {
+      String Uri=fbconnection.getAuthURL();
+      response.sendRedirect(Uri);
+      logger.info("fb page opened");
+      return new ResponseEntity<String>(HttpStatus.OK);
+	}
 	
-	
-
+	@RequestMapping(value="redirectFB",method=RequestMethod.GET)
+	public void redirectFb(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String code = request.getParameter("code");
+		if (code == null || code.equals("")) {
+			throw new RuntimeException(
+					"ERROR: Didn't get code parameter in callback.");
+		}
+		FBConnection fbConnection = new FBConnection();
+		String accessToken = fbConnection.getAccessToken(code);
+		JSONObject json = new JSONObject(accessToken);
+		accessToken=json.getString("access_token");
+		FbGraph fbGraph = new FbGraph(accessToken);
+		String graph = fbGraph.getFBGraph();
+		User user = fbGraph.getGraphData(graph);
+		
+		userService.register(user);
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/home");
+		
+	}
 }
