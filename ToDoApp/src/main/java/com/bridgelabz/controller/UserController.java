@@ -25,6 +25,10 @@ import com.bridgelabz.model.User;
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.util.FBConnection;
 import com.bridgelabz.util.FbGraph;
+import com.bridgelabz.util.GoogleConnection;
+import com.bridgelabz.util.GoogleProfile;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 @RestController
 @RequestMapping("/user")
@@ -40,6 +44,8 @@ public class UserController {
 	private FBConnection fbconnection;
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	private GoogleConnection googleConnection;
 	private static final Logger logger = Logger.getLogger("UserController");
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
@@ -155,11 +161,42 @@ public class UserController {
 		}
 		FBConnection fbConnection = new FBConnection();
 		String accessToken = fbConnection.getAccessToken(code);
+		int i = accessToken.indexOf("{");
+		accessToken = accessToken.substring(i);
 		JSONObject json = new JSONObject(accessToken);
+		System.out.print(json.toString());
 		accessToken=json.getString("access_token");
 		FbGraph fbGraph = new FbGraph(accessToken);
 		String graph = fbGraph.getFBGraph();
 		User user = fbGraph.getGraphData(graph);
+		
+		userService.register(user);
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/home");
+		
+	}
+	
+	@RequestMapping(value="googleConnect",method=RequestMethod.GET)
+	public ResponseEntity<String> googleConnect(HttpServletResponse response) throws IOException {
+      String Uri=googleConnection.getgoogleAuthURL();
+      response.sendRedirect(Uri);
+      logger.info("google page opened");
+      return new ResponseEntity<String>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="redirectGoogle",method=RequestMethod.GET)
+	public void redirectGoogle(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String code = request.getParameter("code");
+		if (code == null || code.equals("")) {
+			throw new RuntimeException(
+					"ERROR: Didn't get code parameter in callback.");
+		}
+		GoogleConnection googleConnection=new GoogleConnection();
+		String accessToken = googleConnection.getAccessToken(code);
+		 JsonObject json = (JsonObject)new JsonParser().parse(accessToken);
+		accessToken=json.get("access_token").getAsString();
+		GoogleProfile googleProfile = new GoogleProfile(accessToken);
+		String profile = googleProfile.getgoogleProfile();
+		User user = googleProfile.getProfileData(profile);
 		
 		userService.register(user);
 		response.sendRedirect("http://localhost:8080/ToDoApp/#!/home");

@@ -32,6 +32,7 @@
 	<mvc:resources location="/script/" mapping="/script/**" />
 	<mvc:resources location="/template/" mapping="/template/**" />
 	<mvc:resources location="/img/" mapping="/img/**" />
+	<mvc:resources location="/bower_components/" mapping="/bower_components/**" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="encryptor"
@@ -83,6 +84,8 @@
 	</bean>
 	
 	<bean id="fbConnection" class="com.bridgelabz.util.FBConnection">
+	</bean>
+	<bean id="googleConnection" class="com.bridgelabz.util.GoogleConnection">
 	</bean>
 	
 	<bean id="jedisConnectionFactory"
