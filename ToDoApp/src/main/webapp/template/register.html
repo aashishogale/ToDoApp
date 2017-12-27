@@ -1,23 +1,49 @@
 
 
-	
-		<div class="container">
-			<label><b>Name</b></label> <input type="text"
-				placeholder="Enter name" name="name" ng-model="user.fname">
-				
-				 <label><b>Email</b></label>
-			<input type="text" placeholder="Enter Email" name="email" required ng-model="user.email">
+<div class="container">
+	<div class="row">
+	<h3>Register page</h3>
+	</div>
+	<div class="row">
+		<label><b>Name</b></label>
+	</div>
+	<div class="row">
+		<input type="text" placeholder="aashish" name="name"
+			ng-model="user.fname" id="fname" pattern="/^[a-zA-Z ]{2,30}$/">
+			<p id="pfname"></p>
+	</div>
+	<div class="row">
+		<label><b>Email</b></label>
+	</div>
+	<div class="row">
+		<input type="text" placeholder="xyz@gmail.com" name="email" required
+			ng-model="user.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email">
+	<p id="pemail">
+	</div>
+	<div class="row">
+		<label><b>Password</b></label>
+	</div>
+	<div class="row">
+		<input type="password" placeholder="*******" name="psw" id="psw"
+			required ng-model="user.password" pattern=".{8,}">
+			<p id="ppsw"></p>
+	</div>
+	<div class="row">
 
-			<label><b>Password</b></label> <input type="password"
-				placeholder="Enter Password" name="psw" required ng-model="user.password"> 
-				<label><b>Number</b></label>
-			<input type="text" placeholder="Enter name" name="number" ng-model="user.number"> <label><b>Password</b></label>
-			
-			<div class="clearfix">
-			<a href="#!/login">	<button type="button" class="cancelbtn">Sign in</button></a>
-				<button type="submit" class="signupbtn" ng-click="registerUser()">Sign Up</button>
-			</div>
-		
-		</div>
+		<label><b>Number</b></label>
+	</div>
+	<div class="row">
+		<input type="text" placeholder="5654657467" name="number" id="number"
+			ng-model="user.number" pattern=".{10,}">
+	</div>
 
+	<div class="row">
 
+		<a href="#!/login">
+			<button type="button" class="signinbtn">Sign in</button>
+		</a>
+		<button type="submit" class="signupbtn" ng-click="registerUser()" onclick="return checkvalid()">Sign
+			Up</button>
+
+	</div>
+</div>

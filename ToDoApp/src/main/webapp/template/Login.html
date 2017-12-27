@@ -2,28 +2,63 @@
 
 
 <div class="container">
-	<label><b>Email</b></label> <input type="text"
-		placeholder="Enter email" name="uname" required ng-model="user.email">
-	<label><b>Password</b></label> <input type="password"
-		placeholder="Enter Password" name="psw" ng-model="user.password">
-
-
-	<div class="clearfix">
-		<button type="button" ng-click="loginUser()" class="login">Login</button>
-		<a href="#!/register"><button type="button" class="registerbtn">register</button></a>
-		<span class="psw">Forgot <a href="#">password?</a></span>
+<div class="row">
+	<h3>Login page</h3>
+	</div>
+	<div class="row">
+		<label><b>Email</b></label>
+	</div>
+	<div class="row">
+		<input type="text" placeholder="abc@gmail.com" name="uname" required
+			ng-model="user.email" id="email">
+			<p id="pemail"></p>
+	</div>
+	<div class="row">
+		<label><b>Password</b></label>
+	</div>
+	<div class="row">
+		<input type="password" placeholder="********" name="psw"
+			ng-model="user.password" id="psw">
+			<p id="ppsw"></p>
 	</div>
 
-	<div style="margin-left: 10px;">
-		<a href="/ToDoApp/user/fbConnect"> <img
-			style="margin-top: 18px; float: left; width: 40%; height: 50px;"
-			src="img/facebookloginbutton.png" />
-			
-		</a>
-		<a href="/ToDoApp/user/googleConnect"> <img
-			style="margin-top: 18px; float: left; width: 40%; height: 50px;"
-			src="img/signin-button.png" />
-			
-		</a>
+
+	<div class="btn">
+		
+
+			<button type="submit" ng-click="loginUser()" onsubmit="return checkvalid()"
+				class=" btn-primary btn-lg" style="width: 25%;" >Login</button>
+
+
+
+			<a href="#!/register"><button type="button"
+					class="btn-primary btn-lg" style="width: 25%;">register</button></a>
+		
+
+	</div>
+
+
+	<div class="row">
+
+		<button href="/ToDoApp/user/fbConnect" class="btn-facebook">Login
+			with facebook</button>
+		<!-- <img
+				style="margin-top: 18px; float: left; width: 25%; height: 50px;"
+				src="img/facebookloginbutton.png" /> -->
+
+
+
+		<button href="/ToDoApp/user/googleConnect" class="btn-google">
+			Login with google
+			<!-- <img
+				style="margin-top: 18px; float: left; width: 25%; height: 50px;"
+				src="img/signin-button.png" />
+
+ -->
+		</button>
+
+	</div>
+	<div class="row">
+		<span class="psw">Forgot <a href="#">password?</a></span>
 	</div>
 </div>

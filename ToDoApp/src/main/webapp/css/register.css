@@ -10,34 +10,35 @@ input[type=text], input[type=password] {
 }
 
 button {
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 100%;
+	
 }
 
 .cancelbtn {
 	padding: 14px 20px;
 	background-color: #f44336;
 }
+.header{
+	float: left; 
+	margin-top: 1%;
+}
+.signinbtn, .signupbtn {
 
-.cancelbtn, .signupbtn {
-	float: left;
-	width: 50%;
+
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 20%;
+}
+.signupbtn{
+	    margin-left:10%;
 }
 
-.container {
-	padding: 16px;
-}
 
-.clearfix::after {
-	content: "";
-	clear: both;
-	display: table;
-}
+
+
 
 @media screen and (max-width: 300px) {
 	.cancelbtn, .signupbtn {
