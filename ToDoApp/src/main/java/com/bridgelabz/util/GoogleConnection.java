@@ -12,8 +12,9 @@ import java.net.URLConnection;
 import org.apache.log4j.Logger;
 
 public class GoogleConnection {
-	public static final String APP_ID = "839674040295-jmp3e3ufmkkg5dfc63po2h83k1bkbpu3.apps.googleusercontent.com";
-	public static final String APP_SECRET = "z4b5YsMZK_YVYy6I6kRPOE3J";
+	public static final String APP_ID = System.getenv("gid");
+
+	public static final String APP_SECRET=System.getenv("gsecid");
 	public static final String REDIRECT_URI = "http://localhost:8080/ToDoApp/user/redirectGoogle/";
 	public String accessToken = "";
 	private static final Logger logger = Logger.getLogger("GoogleConnection");
@@ -27,12 +28,7 @@ public class GoogleConnection {
 
 	}
 
-/*	public String getgoogleAccessToken(String code) {
-		String googletokenUrl = "";
-		googletokenUrl = "https://accounts.google.com/o/oauth2/token?client_id=" + APP_ID + "&redirect_uri="
-				+ REDIRECT_URI + "&client_secret=" + APP_SECRET + "&code=" + code;
-		return googletokenUrl;
-	}*/
+
 
 	public String getAccessToken(String code) throws IOException {
 	

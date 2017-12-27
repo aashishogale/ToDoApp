@@ -1,22 +1,27 @@
 package com.bridgelabz.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.bridgelabz.model.GoogleUser;
 import com.bridgelabz.model.User;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class GoogleProfile {
 	private String accessToken;
@@ -50,12 +55,19 @@ public class GoogleProfile {
 		return outputString;
 	}
 
-	public User getProfileData(String profile) {
+	public User getProfileData(String profile) throws IOException {
 		User user = new User();
-		GoogleUser guser=new Gson().fromJson(profile, GoogleUser.class);
-		logger.info(guser.toString());
-		user.setEmail(guser.getEmail());
-		user.setFname(guser.getName());
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(profile);
+		JsonNode emailsnode = rootNode.path("emails");
+		Iterator<JsonNode> itr = emailsnode.elements();
+		JsonNode valueNode = mapper.readTree(itr.next().toString());
+		JsonNode emailnode = valueNode.path("value");
+		user.setEmail(emailnode.asText());
+		JsonNode namenode = rootNode.path("name");
+		JsonNode givennamenode = namenode.path("givenName");
+		user.setFname(givennamenode.asText());
+
 		return user;
 	}
 

@@ -9,8 +9,8 @@ import java.net.URLConnection;
 
 public class FBConnection {
 
-	public static final String APP_ID = "155877838375438";
-	public static final String APP_SECRET = "f3fbec334f9534ddaad35dfaed42faee";
+	public static final String APP_ID = System.getenv("fbid");
+	public static final String APP_SECRET =System.getenv("fbsecid") ;
 	public static final String REDIRECT_URI = "http://localhost:8080/ToDoApp/user/redirectFB/";
 	static String accessToken = "";
 
