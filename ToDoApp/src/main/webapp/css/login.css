@@ -1,62 +1,102 @@
-input[type=text], input[type=password] {
-	width: 50%;
-	padding: 12px 20px;
+ input[type=text], input[type=password] {
+	width: 40%;
+	padding: 12px 30px;
 	margin: 8px 0;
-	display: inline-block;
+/* 	display: inline-block; */
 	border: 1px solid #ccc;
 	box-sizing: border-box;
-}
+} 
 
 button:hover {
 	opacity: 0.8;
 }
 
-button.btn-primary {
+button.btn-primary.btn-md.btn-login, button.btn-primary.btn-md.btn-register
+	{
 	margin-top: 5%;
 	background-color: #f44336;
 	color: white;
 	padding: 14px 20px;
 	border: none;
 	cursor: pointer;
+	width: 50%;
 }
 
-.login {
-	
+button.btn-primary.btn-md.btn-login {
+	background-color: #4CAF50;
 }
 
 .btn-facebook {
-	margin-top: 5%;
+	margin-top: 10%;
 	color: white;
-	padding: 14px 20px;
 	border: none;
 	cursor: pointer;
-	width: 25%;
+	padding: 14px 20px;
+	width: 50%;
 }
 
 .btn-google {
-	margin-top: 5%;
+	margin-top: 10%;
 	color: white;
-	padding: 14px 20px;
 	border: none;
 	cursor: pointer;
-	width: 25%;
+	padding: 14px 20px;
+	width: 50%;
 }
 
-.container {
-	padding: 16px;
-	margin-left: 25%;
-	align: center;
-	margin-top: 10%;
+.psw {
+	margin-top: 5%
 }
 
-span.psw {
-	margin-left: 30%;
-	margin-top: 25%;
-}
-
-/* @media screen and (max-width: 300px) {
-	span.psw {
-		display: block;
-		float: none;
+@media screen and (max-device-width: 480px) {
+	input[type=text], input[type=password] {
+		width: 100%;
+	/* 	padding: 8px 22px; */
+/* 		//margin: 8px 0; */
+		margin-top: 10%;
+		/* height:258px; */ '
+		display: inline-block;
+		border: 10px solid #ccc;
+		box-sizing: border-box;
+		display: inline-block;
+	}
+	label {
+		margin-top: 10%;
+		font-size: 30px;
+	}
+	button:hover {
+		opacity: 0.8;
+	}
+	button.btn-primary.btn-md.btn-login, button.btn-primary.btn-md.btn-register
+		{
+		margin-top: 5%;
+		background-color: #f44336;
+		color: white;
+		padding: 40px 100px;
+		border: none;
+		cursor: pointer;
+		width: 100%;
+	}
+	button.btn-primary.btn-md.btn-login {
+		background-color: #4CAF50;
+	}
+	/*.btn-facebook {
+		margin-top: 10%;
+		color: white;
+		border: none;
+		cursor: pointer;
+		padding: 50px 200px;
+		width: 50%;
+	}
+	.btn-google {
+		margin-top: 10%;
+		color: white;
+		border: none;
+		cursor: pointer;
+		padding: 140px 200px;
+		width: 50%;
+	}
+	.psw {
+		margin-top: 5%
 	} */
 }

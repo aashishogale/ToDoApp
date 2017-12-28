@@ -9,34 +9,25 @@ input[type=text], input[type=password] {
 	box-sizing: border-box;
 }
 
-button {
-	
-}
-
-.cancelbtn {
-	padding: 14px 20px;
-	background-color: #f44336;
-}
-.header{
-	float: left; 
+.header {
+	float: left;
 	margin-top: 1%;
 }
+
 .signinbtn, .signupbtn {
-
-
 	background-color: #4CAF50;
 	color: white;
 	padding: 14px 20px;
 	margin: 8px 0;
 	border: none;
 	cursor: pointer;
-	width: 20%;
-}
-.signupbtn{
-	    margin-left:10%;
+	width: 48%;
 }
 
-
+.signupbtn {
+	margin-left: 10%;
+	background-color: #f44336;
+}
 
 
 

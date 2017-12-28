@@ -1,49 +1,88 @@
 
+<div class="boxc">
+	<div class="container">
+		<div class="row">
+			<h3>Register page</h3>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<label><b>Name</b></label>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<input type="text" placeholder="aashish" name="name"
+					ng-model="user.fname" id="fname" pattern="/^[a-zA-Z ]{2,30}$/"
+					class="form-control">
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<p id="pfname"></p>
 
-<div class="container">
-	<div class="row">
-	<h3>Register page</h3>
-	</div>
-	<div class="row">
-		<label><b>Name</b></label>
-	</div>
-	<div class="row">
-		<input type="text" placeholder="aashish" name="name"
-			ng-model="user.fname" id="fname" pattern="/^[a-zA-Z ]{2,30}$/">
-			<p id="pfname"></p>
-	</div>
-	<div class="row">
-		<label><b>Email</b></label>
-	</div>
-	<div class="row">
-		<input type="text" placeholder="xyz@gmail.com" name="email" required
-			ng-model="user.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email">
-	<p id="pemail">
-	</div>
-	<div class="row">
-		<label><b>Password</b></label>
-	</div>
-	<div class="row">
-		<input type="password" placeholder="*******" name="psw" id="psw"
-			required ng-model="user.password" pattern=".{8,}">
-			<p id="ppsw"></p>
-	</div>
-	<div class="row">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<label><b>Email</b></label>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<input type="text" placeholder="xyz@gmail.com" name="email" required
+					ng-model="user.email"
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email"
+					class="form-control">
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<p id="pemail">
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<label><b>Password</b></label>
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<input type="password" placeholder="*******" name="psw" id="psw"
+						required ng-model="user.password" pattern=".{8,}"
+						class="form-control">
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<p id="ppsw"></p>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<label><b>Number</b></label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<input type="text" placeholder="5654657467" name="number"
+						id="number" ng-model="user.number" pattern=".{10,}"
+						class="form-control">
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<p id="pnumber"></p>
+				</div>
 
-		<label><b>Number</b></label>
-	</div>
-	<div class="row">
-		<input type="text" placeholder="5654657467" name="number" id="number"
-			ng-model="user.number" pattern=".{10,}">
-	</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-3">
+					<button type="submit" class="signupbtn" ng-click="registerUser()"
+						onclick="return checkvalid()">Sign Up</button>
+				</div>
+				<div class="col-md-3">
+					<a href="#!/login">
+						<button type="button" class="signinbtn">Sign in</button>
+					</a>
+				</div>
 
-	<div class="row">
-
-		<a href="#!/login">
-			<button type="button" class="signinbtn">Sign in</button>
-		</a>
-		<button type="submit" class="signupbtn" ng-click="registerUser()" onclick="return checkvalid()">Sign
-			Up</button>
-
+			</div>
+		</div>
 	</div>
 </div>

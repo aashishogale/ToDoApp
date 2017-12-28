@@ -1,5 +1,5 @@
 var toDo = angular.module('ToDo');
-toDo.controller('registerController', function($scope, registerService,$location/*$state*/){
+toDo.controller('registerController', function($scope, registerService,$location){
 	$scope.registerUser = function(){
 		var a=registerService.registerUser($scope.user,$scope.error);
 			a.then(function(response) {
