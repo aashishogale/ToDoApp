@@ -44,7 +44,7 @@ function checkvalid() {
 
 
 
-	if (document.getElementById("mobile").value.length < 10) {
+	if (document.getElementById("number").value.length < 10) {
 		document.getElementById("pnumber").innerHTML="please enter correct 9 digit number";
 		return false;
 	}

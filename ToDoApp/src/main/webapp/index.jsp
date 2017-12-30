@@ -29,9 +29,10 @@
 <script type="text/javascript" src="controller/loginController.js"></script>
 <script type="text/javascript" src="service/registerService.js"></script>
 <script type="text/javascript" src="service/loginService.js"></script>
-
-
-
+<script type="text/javascript" src="controller/noteController.js"></script>
+<script type="text/javascript" src="service/noteService.js"></script>
+<script type="text/javascript" src="controller/dummyController.js"></script>
+<script type="text/javascript" src="service/dummyService.js"></script>
 
 
 </head>

@@ -13,7 +13,7 @@ public interface NoteService {
 
 	public void updateNote(Note note);
 
-	public List<Note> getNoteList(User user);
+	public List<Note> getNoteList(int id);
 
 	public Note getNotebyId(int id);
 

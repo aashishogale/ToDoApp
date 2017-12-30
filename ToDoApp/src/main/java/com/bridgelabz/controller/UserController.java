@@ -1,5 +1,6 @@
 package com.bridgelabz.controller;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.util.Map;
 
@@ -81,8 +82,9 @@ public class UserController {
 		CustomResponse response = new CustomResponse();
 		if (user != null) {
 			String token = userService.generateToken(user.getId());
-
+            
 			System.out.print(token);
+			response.setToken(token);
 			request.setAttribute("token", token);
 			response.setMessage(token);
 			response.setCode(1);
@@ -190,6 +192,7 @@ public class UserController {
 			throw new RuntimeException(
 					"ERROR: Didn't get code parameter in callback.");
 		}
+		
 		GoogleConnection googleConnection=new GoogleConnection();
 		String accessToken = googleConnection.getAccessToken(code);
 		 JsonObject json = (JsonObject)new JsonParser().parse(accessToken);
@@ -198,8 +201,18 @@ public class UserController {
 		String profile = googleProfile.getgoogleProfile();
 		User user = googleProfile.getProfileData(profile);
 		
-		userService.register(user);
-		response.sendRedirect("http://localhost:8080/ToDoApp/#!/home");
+		User userins=userService.registerSocial(user);
+		String token = userService.generateToken(user.getId());
+		
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/dummy");
+		
+	}
+	@RequestMapping(value="retrieveToken",method=RequestMethod.POST)
+	public ResponseEntity<CustomResponse> retrieveToken(HttpServletRequest request){
+		CustomResponse customResponse=new CustomResponse();
+		String token=userService.getTokenFromRedis();
+		customResponse.setToken(token);
+		return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.OK);
 		
 	}
 }

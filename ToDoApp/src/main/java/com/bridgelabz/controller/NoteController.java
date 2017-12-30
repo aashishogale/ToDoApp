@@ -67,10 +67,12 @@ public class NoteController {
 	}
 
 	@RequestMapping(value = "returnnotelist", method = RequestMethod.POST)
-	public ResponseEntity<List<Note>> getAllNotesbyUserId(@RequestBody User user, HttpServletRequest request) {
+	public ResponseEntity<List<Note>> getAllNotesbyUserId(HttpServletRequest request) {
+		logger.info("note entered");
 		String token = (String) request.getHeader("token");
 		if (userService.checkToken(token)) {
-			return new ResponseEntity<List<Note>>(noteService.getNoteList(user), HttpStatus.OK);
+			int id=userService.getidbyToken(token);
+			return new ResponseEntity<List<Note>>(noteService.getNoteList(id),HttpStatus.OK);
 		} else {
 			return new ResponseEntity<List<Note>>(HttpStatus.CONFLICT);
 		}

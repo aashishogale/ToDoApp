@@ -34,8 +34,8 @@ public class NoteServiceImpl implements NoteService {
 
 	}
 
-	public List<Note> getNoteList(User user) {
-		return notedao.getNoteList(user);
+	public List<Note> getNoteList(int id) {
+		return notedao.getNoteList(id);
 	}
 
 	public Note getNotebyId(int id) {

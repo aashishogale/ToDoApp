@@ -21,6 +21,8 @@ public interface UserService {
 	 * @param login
 	 * @return user-validated user
 	 */
+	public User registerSocial(User user);
+
 	public User validateUser(Login login);
 
 	public void generateOtp(String email);
@@ -36,4 +38,5 @@ public interface UserService {
 	public User getUserById(int id);
 
 	public void updateVerifyUser(User user);
+	public String getTokenFromRedis();
 }

@@ -44,16 +44,27 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(rollbackFor = Exception.class)
 	public boolean register(User user) {
+
 		user.setVerified(false);
 		boolean saved = userDao.register(user);
 		logger.info("user saved");
-		if (saved == true) {
-			mailSetter.sendMail(user.getEmail());
-			logger.info("mail sent");
+		// if (saved == true) {
+		mailSetter.sendMail(user.getEmail());
+		logger.info("mail sent");
 
-		}
+		// }
 
 		return saved;
+
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public User registerSocial(User user) {
+
+		User usersoc = userDao.registerSocial(user);
+		logger.info("user saved");
+
+		return usersoc;
 
 	}
 
@@ -100,7 +111,7 @@ public class UserServiceImpl implements UserService {
 
 		redisTemplate.setEnableTransactionSupport(true);
 
-		redisTemplate.opsForValue().set(Integer.toString(id), token);
+		redisTemplate.opsForValue().set("token", token);
 
 		return token;
 
@@ -131,5 +142,11 @@ public class UserServiceImpl implements UserService {
 		userDao.updateVerifyUser(user);
 
 	}
+
+	public String getTokenFromRedis() {
+		String token=redisTemplate.opsForValue().get("token");
+		return token ;
+	}
+	
 
 }

@@ -22,10 +22,11 @@ ToDo.config([ '$stateProvider', '$urlRouterProvider',
 				controller:'noteController'
             
 			})
-			.state('forgotpassword',{
-				url:'/forgotpassword',
-				templateUrl:'template/forgotpassword.html',
-					controller:'forgotController'
+			.state('dummy', {
+				url : '/dummy',
+				templateUrl : 'template/dummy.html',
+				controller:'dummyController'
+            
 			})
 			
 			

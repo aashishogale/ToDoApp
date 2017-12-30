@@ -47,14 +47,19 @@
 		</nav>
 		<div class="container"
 			style="margin-left: 10%; margin-top: 10%; margin-left: 10%;">
-			<div id="notes" class="row">
+			<div id="notes" class="row" >
 
-				<div id="note" class="col-md-3"><h3>title</h3>
+				<div id="note" class="col-md-3" ng-repeat="note in notes">
+					<h3>title</h3>
+					<h3>{{note.title}}</h3>
+					<h3>description</h3>
+					<h3>{{note.description}}</h3>
+
 				</div>
 
-				<div id="note" class="col-md-3"></div>
+				<!-- 	<div id="note" class="col-md-3"></div>
 
-				<div id="note" class="col-md-3"></div>
+				<div id="note" class="col-md-3"></div> -->
 			</div>
 		</div>
 

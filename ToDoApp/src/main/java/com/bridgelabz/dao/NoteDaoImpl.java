@@ -56,11 +56,11 @@ public class NoteDaoImpl implements NoteDao {
 
 	}
 
-	public List<Note> getNoteList(User user) {
+	public List<Note> getNoteList(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query<Note> query = session.createQuery("from Note where userid=:id");
-		query.setParameter("id", user.getId());
+		query.setParameter("id", id);
 		List<Note> notes = query.getResultList();
 		return notes;
 
