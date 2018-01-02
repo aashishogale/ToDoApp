@@ -59,10 +59,12 @@ a:hover {
 	background: #6d7fcc;
 	font-color: #0b0b0a;
 }
-
+.notes{
+	margin-top:5%;
+}
 #note {
 	box-sizing: border-box;
-
+     margin-top:5%;
 	border: none;
 	box-shadow: 0 2px 5px 0;
 	height: 270px;
@@ -74,4 +76,29 @@ a:hover {
 #note:hover {
   box-shadow: 0 2px 15px rgba(0,0,0,0.30);
 }
+.create-note{
+		box-shadow: 0 2px 5px 0;
+		box-sizing: border-box;
+		height:150px;
+	     
+}
+.show-create{
+		box-shadow: 0 2px 5px 0;
+		box-sizing: border-box;
+	     
+}
+
+.Title,.desc{
+	border:0px;
+	padding:0px;
+	margin:none;
+	background:transparent;
+}
+
+.noteadd{
+	margin-left:4%;
+}
+
+
+
 }

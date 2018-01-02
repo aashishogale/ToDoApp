@@ -172,8 +172,10 @@ public class UserController {
 		String graph = fbGraph.getFBGraph();
 		User user = fbGraph.getGraphData(graph);
 		
-		userService.register(user);
-		response.sendRedirect("http://localhost:8080/ToDoApp/#!/home");
+		User userins=userService.registerSocial(user);
+		String token = userService.generateToken(user.getId());
+		
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/dummy");
 		
 	}
 	

@@ -1,7 +1,7 @@
 var toDo=angular.module('ToDo');
 toDo.factory('noteService',function($http,$location){
 	var details = {};
-	details.service=function(method,url){
+	details.service=function(method,url,note){
 	
 	
 	return $http({
@@ -9,7 +9,8 @@ toDo.factory('noteService',function($http,$location){
 		url : url,
 		headers: {
 		'token':sessionStorage.getItem('token')
-		}
+		},
+	    data:note
 		
 	})
 	}

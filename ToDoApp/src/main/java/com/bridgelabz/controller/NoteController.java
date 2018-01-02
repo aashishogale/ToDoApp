@@ -32,7 +32,7 @@ public class NoteController {
 	public ResponseEntity<Note> createNote(@RequestBody Note note, HttpServletRequest request) {
 
 		String token = (String) request.getHeader("token");
-
+		logger.info("create note"+note.getTitle());
 		if (userService.checkToken(token)) {
 			int id = userService.getidbyToken(token);
 			User user = userService.getUserById(id);
@@ -46,6 +46,7 @@ public class NoteController {
 	@RequestMapping(value = "updatenote", method = RequestMethod.POST)
 	public ResponseEntity<Note> updateNote(@RequestBody Note note, HttpServletRequest request) {
 		String token = (String) request.getHeader("token");
+		logger.info("update note"+note.getId());
 		if (userService.checkToken(token)) {
 			noteService.updateNote(note);
 			return new ResponseEntity<Note>(note, HttpStatus.OK);

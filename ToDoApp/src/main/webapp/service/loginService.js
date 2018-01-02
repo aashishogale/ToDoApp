@@ -3,7 +3,7 @@ var toDo = angular.module('ToDo');
 toDo.factory('loginService', function($http, $location) {
 
 	var details = {};
-	sessionStorage.clear()
+
 	details.service = function(method, url, user) {
 		return $http({
 			method : method,
