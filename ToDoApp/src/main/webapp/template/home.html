@@ -45,60 +45,98 @@
 
 
 		</nav>
-		<div class="container"
-			style="margin-left: 10%; margin-top: 10%; margin-left: 10%;"
-			ng-init="showthis=true">
 
-			<div class=bootcreate ng-show="showthis">
-				<div class="show-create col-md-6"
-					ng-click="show=true; showthis=false">
-					<label>take a note</label>
-				</div>
+	<div class="container"
+		style="margin-left: 10%; margin-top: 10%; margin-left: 10%;"
+		ng-init="showthis=true">
+
+		<div class=bootcreate ng-show="showthis">
+			<div class="show-create col-md-6"
+				ng-click="show=true; showthis=false">
+				<label>take a note</label>
 			</div>
-			<div class="bootcreatenote" ng-show="show">
-				<div class="create-note col-md-6">
-					<div class="row noteadd">
-						<input type="text" ng-model="note.title" placeholder="Title"
-							class="Title">
-					</div>
-					<div class="row noteadd">
-						<input type="text" placeholder="Take a note"
-							ng-model="note.description" class="desc">
-					</div>
-					<div class="row noteadd">
-						<input type="submit" ng-click="addNote();show=false;showthis=true"
-							class="noteenter">
-					</div>
+		</div>
+		<div class="bootcreatenote" ng-show="show">
+			<div class="create-note col-md-6">
+				<div class="row noteadd">
+					<input type="text" ng-model="note.title" placeholder="Title"
+						class="Title">
 				</div>
-
-			</div>
-
-
-			<div id="notes" class="row">
-
-				<div id="note" class="note-edit col-md-3"
-					ng-repeat="note in noteList" ng-click="editnote=true">
-
-
-					<div class="row noteadd">
-						<input type="text" ng-model="note.title"
-							placeholder="{{note.title}}" class="Title">
-					</div>
-					<div class="row noteadd">
-						<input type="text" placeholder="{{note.description}}"
-							ng-model="note.description" class="desc">
-					</div>
-					<div class="row noteadd">
-						<input type="submit" ng-click="editNote(note)" ng-show="editnote"
-							class="noteenter">
-					</div>
+				<div class="row noteadd">
+					<input type="text" placeholder="Take a note"
+						ng-model="note.description" class="desc">
 				</div>
-
-
-
+				<div class="row noteadd">
+					<input type="submit" ng-click="addNote();show=false;showthis=true"
+						class="noteenter">
+				</div>
 			</div>
 
 		</div>
 
+
+		<div id="notes" class="row">
+
+			<div id="note" class="note-edit  col-md-3"
+				ng-repeat="note in noteList" ng-click="openCustomModal(note);">
+
+				<!-- <div id="myModal" class="modal fade" role="dialog"> 
+						<div class="modal-dialog"> -->
+				<!-- <div class="modal-content">  -->
+				<div class="row noteadd">
+					<input type="text" ng-model="note.title"
+						placeholder="{{note.title}}" class="Title">
+				</div>
+				<div class="row noteadd">
+					<input type="text" placeholder="{{note.description}}"
+						ng-model="note.description" class="desc">
+				</div>
+				<div class="row noteadd">
+					<input type="submit" ng-click="editNote(note)" ng-show="editnote"
+						data-dismiss="modal" class="noteenter">
+				</div>
+			</div>
+
+		</div>
 	</div>
 </div>
+<!-- 	<div id="myModal2" class="modal fade" role="dialog">
+		<div id=note>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="note-edit">
+						<div class="modal-header">
+
+							<div class="row noteadd">
+								<input type="text" ng-model="note.title"
+									placeholder="{{note.title}}" class="Title">
+							</div>
+							<div class="row noteadd">
+								<input type="text" placeholder="{{note.description}}"
+									ng-model="note.description" class="desc">
+							</div>
+							<div class="row noteadd">
+								<input type="submit" ng-click="editNote(note)"
+									ng-show="editnote" data-dismiss="modal" class="noteenter">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ -->
+
+
+
+
+
+
+	<!-- 	</div> 
+		
+		
+		
+		
+- 
+	</div> -->
+	<!-- </div>  -->

@@ -34,7 +34,8 @@
 <script type="text/javascript" src="controller/dummyController.js"></script>
 <script type="text/javascript" src="service/dummyService.js"></script>
 
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
 </head>
 <body ng-app="ToDo">
 	<div ui-view></div>

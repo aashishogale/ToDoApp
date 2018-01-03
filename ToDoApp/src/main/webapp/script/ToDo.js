@@ -1,4 +1,4 @@
-var ToDo = angular.module('ToDo', [ 'ui.router' ])
+var ToDo = angular.module('ToDo', [ 'ui.router', 'ui.bootstrap' ])
 
 ToDo.config([ '$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {

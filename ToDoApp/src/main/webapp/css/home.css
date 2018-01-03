@@ -8,6 +8,7 @@
 .wrapper {
 	display: flex;
 }
+	
 
 #sidebar {
 	min-width: 250px;
@@ -53,52 +54,61 @@ a:hover {
 	margin-left: 5px;
 }
 
- ul ul a {
+ul ul a {
 	font-size: 0.9em !important;
 	padding-left: 30px !important;
 	background: #6d7fcc;
 	font-color: #0b0b0a;
 }
-.notes{
-	margin-top:5%;
+
+.notes {
+	margin-top: 5%;
 }
+
 #note {
 	box-sizing: border-box;
-     margin-top:5%;
+	margin-top: 5%;
 	border: none;
 	box-shadow: 0 2px 5px 0;
 	height: 270px;
-	width:100%;
-	margin-left:4%;
+	width: 100%;
+	margin-left: 4%;
 	/*   padding: 1 box-shadow: none;*/
 	/*  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
 }
+
 #note:hover {
-  box-shadow: 0 2px 15px rgba(0,0,0,0.30);
-}
-.create-note{
-		box-shadow: 0 2px 5px 0;
-		box-sizing: border-box;
-		height:150px;
-	     
-}
-.show-create{
-		box-shadow: 0 2px 5px 0;
-		box-sizing: border-box;
-	     
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.30);
 }
 
-.Title,.desc{
-	border:0px;
-	padding:0px;
-	margin:none;
-	background:transparent;
+.create-note {
+	box-shadow: 0 2px 5px 0;
+	box-sizing: border-box;
+	height: 150px;
 }
 
-.noteadd{
-	margin-left:4%;
+.show-create {
+	box-shadow: 0 2px 5px 0;
+	box-sizing: border-box;
 }
 
+.Title, .desc {
+	border: 0px;
+	padding: 0px;
+	margin: none;
+	background: transparent;
+}
 
+.noteadd {
+	margin-left: 4%;
+}
 
+.fade {
+	opacity: 1;
+	transition: opacity .15s linear;
+}
+
+.modal {
+	display: block;
+}
 }

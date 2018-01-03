@@ -16,24 +16,23 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	/*@NotNull*/
+	/* @NotNull */
 	private int id;
 
 	@Column(name = "isVerified")
 	private boolean isVerified;
-	/*@NotNull*/
+	/* @NotNull */
 	@Column(name = "name")
 	private String fname;
 
-/*	@NotNull*/
+	/* @NotNull */
 	@Email
 	@Column(name = "email")
 	private String email;
 
-
 	@Column(name = "password")
 	private String password;
-    @Size(max=8)
+	@Size(max = 8)
 	@Column(name = "number")
 	private String number;
 
