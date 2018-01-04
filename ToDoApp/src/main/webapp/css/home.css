@@ -1,18 +1,19 @@
 @charset "UTF-8";
 
-.navbar {
+.navbar.fixed-top {
 	background-color: #c3a010;
 	min-height: 60px;
 }
 
 .wrapper {
-	display: flex;
+    display: flex;
+    align-items: stretch;
 }
 	
 
 #sidebar {
 	min-width: 250px;
-	max-width: 250px;
+/* 	max-width: 250px; */
 	height: 100vh;
 }
 
@@ -45,6 +46,8 @@ a:hover {
 
 #sidebar ul p {
 	padding: 10px;
+	transition:margin 0.3s ease;
+	
 }
 
 #sidebar ul li a {
@@ -110,5 +113,10 @@ ul ul a {
 
 .modal {
 	display: block;
+}
+
+#sidebar.toggled {
+	display:none;
+    margin-left: -250px;
 }
 }

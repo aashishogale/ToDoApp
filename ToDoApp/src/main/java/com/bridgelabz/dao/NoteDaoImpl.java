@@ -78,9 +78,9 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-	
+
 		note.setPin(!(note.isPin()));
-	
+
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
@@ -88,10 +88,11 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	public void trashNote(int id) {
+		logger.info("trash entered");
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-		note.setPin(!(note.isTrash()));
+		note.setTrash(!(note.isTrash()));
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
@@ -118,11 +119,10 @@ public class NoteDaoImpl implements NoteDao {
 		session.getTransaction().commit();
 		session.close();
 
-		
 	}
 
 	public void deleteReminder(int id) {
-		
+
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
@@ -132,7 +132,7 @@ public class NoteDaoImpl implements NoteDao {
 		session.close();
 	}
 
-	public void setColor(int id,String color) {
+	public void setColor(int id, String color) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
@@ -140,10 +140,7 @@ public class NoteDaoImpl implements NoteDao {
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
-		
-		
+
 	}
 
-	
-	
 }

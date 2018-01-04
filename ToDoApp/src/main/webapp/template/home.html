@@ -1,42 +1,45 @@
 
-<div>
-	<div class="navigate">
-		<nav class="navbar navbar-default"></nav>
-	</div>
 
-	<div class="wrapper">
+<div class="navigate">
+	<nav  class="navbar fixed-top navbar-default ">
+		<button id="collapsebutton"></button>
+	</nav>
 
-		<nav id="sidebar">
+</div>
 
-			<ul class="list-unstyled components">
+<div class="wrapper">
 
+	 <nav id="sidebar" class="navbar fixed-left navbar-toggleable-md navbar-light bg-faded" > 
 
-				<li><a>Notes</a></li>
-
-
-
-				<li><a>Reminders</a></li>
-			</ul>
-			<ul class="list-unstyled components">
-				<li><a>Labels</a></li>
-
-				<li><a>Create new label</a></li>
-			</ul>
-			<ul class="list-unstyled components">
-				<li><a>Archive</a></li>
-				<li><a>Trash</a></li>
-			</ul>
-			<ul class="list-unstyled components">
-				<li><a>Settings</a></li>
+		<ul class="list-unstyled components">
 
 
-				<li><a>Send Feedback</a></li>
-				<li><a>Help</a></li>
-				<li><a>Trash</a></li>
-				<li><a>App Downloads</a></li>
+			<li><a>Notes</a></li>
 
-				<li><a>KeyBoard Shortcuts</a></li>
-			</ul>
+
+
+			<li><a>Reminders</a></li>
+		</ul>
+		<ul class="list-unstyled components">
+			<li><a>Labels</a></li>
+
+			<li><a>Create new label</a></li>
+		</ul>
+		<ul class="list-unstyled components">
+			<li><a>Archive</a></li>
+			<li><a>Trash</a></li>
+		</ul>
+		<ul class="list-unstyled components">
+			<li><a>Settings</a></li>
+
+
+			<li><a>Send Feedback</a></li>
+			<li><a>Help</a></li>
+			<li><a>Trash</a></li>
+			<li><a>App Downloads</a></li>
+
+			<li><a>KeyBoard Shortcuts</a></li>
+		</ul>
 
 
 
@@ -45,7 +48,7 @@
 
 
 		</nav>
-
+	
 	<div class="container"
 		style="margin-left: 10%; margin-top: 10%; margin-left: 10%;"
 		ng-init="showthis=true">
@@ -78,11 +81,10 @@
 		<div id="notes" class="row">
 
 			<div id="note" class="note-edit  col-md-3"
-				ng-repeat="note in noteList" ng-click="openCustomModal(note);">
+				ng-repeat="note in noteList|orderBy :'-date'|filter:{trash:false}|filter:{archive:false}"
+				ng-click="openCustomModal(note);">
 
-				<!-- <div id="myModal" class="modal fade" role="dialog"> 
-						<div class="modal-dialog"> -->
-				<!-- <div class="modal-content">  -->
+
 				<div class="row noteadd">
 					<input type="text" ng-model="note.title"
 						placeholder="{{note.title}}" class="Title">
@@ -91,52 +93,9 @@
 					<input type="text" placeholder="{{note.description}}"
 						ng-model="note.description" class="desc">
 				</div>
-				<div class="row noteadd">
-					<input type="submit" ng-click="editNote(note)" ng-show="editnote"
-						data-dismiss="modal" class="noteenter">
-				</div>
+
 			</div>
 
 		</div>
 	</div>
 </div>
-<!-- 	<div id="myModal2" class="modal fade" role="dialog">
-		<div id=note>
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="note-edit">
-						<div class="modal-header">
-
-							<div class="row noteadd">
-								<input type="text" ng-model="note.title"
-									placeholder="{{note.title}}" class="Title">
-							</div>
-							<div class="row noteadd">
-								<input type="text" placeholder="{{note.description}}"
-									ng-model="note.description" class="desc">
-							</div>
-							<div class="row noteadd">
-								<input type="submit" ng-click="editNote(note)"
-									ng-show="editnote" data-dismiss="modal" class="noteenter">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
- -->
-
-
-
-
-
-
-	<!-- 	</div> 
-		
-		
-		
-		
-- 
-	</div> -->
-	<!-- </div>  -->

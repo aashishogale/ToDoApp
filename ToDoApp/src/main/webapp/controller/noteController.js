@@ -46,8 +46,10 @@ toDo.controller('noteController', function($scope, noteService, $uibModal) {
 			controller : dialogController,
 		
 		});
+		
+		
 	}
-	function dialogController($scope,items,noteService){
+	function dialogController($scope,items,noteService,$uibModalStack){
 		$scope.data=items;
 		console.log("inside dialog controller",items);
 		$scope.editNote = function(note) {
@@ -58,5 +60,24 @@ toDo.controller('noteController', function($scope, noteService, $uibModal) {
 			});
 		};
 	
+	$scope.close=function(){
+		$uibModalStack.dismissAll();
+		}
+	
+	$scope.trashNote = function(note) {
+		console.log(items);
+		var trashednote = noteService.service('POST', 'note/trashnote', items);
+		trashednote.then(function(response) {
+			console.log(response.data);
+		});
+	};
 	}
+});
+
+
+$("#collapsebutton").click(function(e) {
+    e.preventDefault();
+    console.log("toggle entered");
+    $("#sidebar").toggleClass("toggled");
+    alert(1);
 });
