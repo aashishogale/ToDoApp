@@ -75,9 +75,4 @@ toDo.controller('noteController', function($scope, noteService, $uibModal) {
 });
 
 
-$("#collapsebutton").click(function(e) {
-    e.preventDefault();
-    console.log("toggle entered");
-    $("#sidebar").toggleClass("toggled");
-    alert(1);
-});
+

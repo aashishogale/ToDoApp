@@ -1,0 +1,28 @@
+<div id="editnote">
+	<form>
+		<div class="form-group">
+			<div class="row noteadd">
+				<input type="text" ng-model="data.title"
+					placeholder="{{data.title}}" class="Title">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row noteadd">
+				<input type="text" placeholder="{{data.description}}"
+					ng-model="data.description" class="desc">
+			</div>
+		</div>
+
+
+
+		<div class="row noteadd">
+			<input type="submit" value="edit" ng-click="editNote(data);close();"
+				class="noteenter">
+
+		</div>
+		<div class="row noteadd">
+			<a ng-click="trashNote(data);close();" class="notetrash"> trash</a>
+
+		</div>
+	</form>
+</div>
