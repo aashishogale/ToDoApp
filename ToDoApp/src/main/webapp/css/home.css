@@ -12,9 +12,13 @@
 
 #sidebar {
 	min-width: 250px;
-	/* 	max-width: 250px; */
+	max-width: 250px;
 	height: 100vh;
-	margin-top: 10%;
+	margin-top: 15%;
+}
+
+#sidebar.active {
+	margin-left: -250px;
 }
 
 .container-fluid {
@@ -69,7 +73,7 @@ ul ul a {
 	font-color: #0b0b0a;
 }
 
-.notes {
+#notes {
 	margin-top: 5%;
 }
 
@@ -78,10 +82,12 @@ ul ul a {
 	margin-top: 5%;
 	border: none;
 	box-shadow: 0 2px 5px 0;
-	height: 270px;
-	width: 100%;
+display:inline-block;
+	width : 100%;
 	margin-left: 4%;
-	visibility:visible;
+	visibility: visible;
+	width: 100%;
+
 	/*   padding: 1 box-shadow: none;*/
 	/*  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
 }
@@ -101,10 +107,9 @@ ul ul a {
 	box-sizing: border-box;
 }
 
-
 .Title, .desc {
-	border: 0px;
-	padding: 0px;
+	width: 90%;
+	outline: none;
 	margin: none;
 	background: transparent;
 }
@@ -121,35 +126,70 @@ ul ul a {
 .modal {
 	display: block;
 }
+
 .modal-backdrop {
-    z-index: 1040 !important;
-    filter:blur(20px);
+	z-index: 1040 !important;
+	filter: blur(20px);
 }
+
 .modal-dialog {
-    margin: 2px auto;
-    z-index: 1100 !important;
-    margin-top:10%;
+	margin: 2px auto;
+	z-index: 1100 !important;
+	margin-top: 10%;
 }
-.modal-content{
-	margin-top:5%;
+
+.modal-content {
+	margin-top: 5%;
+}
+
+.flex-container {
+	overflow-y: auto;
+	height: auto;
 }
 
 #sidebar.collapse {
 	display: none;
 }
-#editnote{
+
+#editnote {
 	box-sizing: border-box;
-	
 	border: none;
 	box-shadow: 0 2px 5px 0;
 	height: 270px;
 	width: 100%;
 }
-.noteenter{
-	background:transparent;
-	border:none;
+
+.noteenter {
+	background: transparent;
+	border: none;
 }
+
 .modal-open .container-fluid, .modal-open  .container {
-    -webkit-filter: blur(5px) grayscale(90%);
+	-webkit-filter: blur(5px) grayscale(90%);
 }
+
+.desc:empty:before {
+	content: attr(data-placeholder);
+	color: gray;
+}
+
+.addTitle:empty:before {
+	content: attr(data-placeholder);
+	color: gray;
+}
+
+.Title:empty:before {
+	content: attr(data-placeholder);
+	color: gray;
+}
+
+.Title:before {
+	content: "";
+}
+.row{
+	display:inline-table;
+}
+
+#notes.collapsed {
+	
 }

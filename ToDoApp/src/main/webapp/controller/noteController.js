@@ -13,8 +13,9 @@ toDo.controller('noteController', function($scope, noteService, $uibModal) {
 
 	};
 
-	$scope.addNote = function() {
-		var note = noteService.service('POST', 'note/createnote', $scope.note);
+	$scope.addNote = function(note) {
+		console.log(note);
+		var note = noteService.service('POST', 'note/createnote',note);
 		note.then(function(response) {
 			console.log(response.data);
 		});
@@ -41,7 +42,31 @@ toDo.controller('noteController', function($scope, noteService, $uibModal) {
 			  
 			templateUrl : 'template/EditNote.html',
 			 parent: angular.element(document.body),
-			/*controller:['$modalInstance','note',noteController],*/
+			/* controller:['$modalInstance','note',noteController], */
+			controllerAs: 'controller',
+			controller : dialogController,
+		
+		}).result.then(function(){}, function(res){});
+		
+		
+	}
+	
+	
+		
+	
+	$scope.openTrashModal = function(note) {
+		
+
+		$uibModal.open({
+			resolve: {
+			    items: function () {
+			      return note;
+			    }
+			  },
+			  
+			templateUrl : 'template/trashnote.html',
+			 parent: angular.element(document.body),
+			/* controller:['$modalInstance','note',noteController], */
 			controllerAs: 'controller',
 			controller : dialogController,
 		

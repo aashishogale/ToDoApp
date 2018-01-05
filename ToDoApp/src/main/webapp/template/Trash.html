@@ -1,0 +1,26 @@
+<navbar></navbar>
+<div class="wrapper">
+	<sidebar style="margin-top:10%;"></sidebar>
+	<div class="container" style="margin-top: 10%;">
+		<div id="notes" class="row">
+
+			<div id="note" class="note-edit  col-md-3"
+				ng-repeat="note in noteList|orderBy :'-date'|filter:{trash:true}|filter:{archive:false}"
+				ng-click="openTrashModal(note);">
+
+
+				<div class="row noteadd">
+					<div ng-model="note.title" role="textbox" class="Title "
+						aria-multiline="true" contentEditable="true" contenteditable
+						data-placeholder="{{note.title}}"></div>
+				</div>
+				<div class="row noteadd">
+					<div role="textbox" ng-model="note.description" class="desc"
+						aria-multiline="true" contentEditable="true" contentedittable
+						data-placeholder="{{note.description}}"></div>
+				</div>
+		
+			</div>
+		</div>
+	</div>
+</div>

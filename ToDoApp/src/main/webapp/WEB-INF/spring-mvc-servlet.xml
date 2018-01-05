@@ -32,6 +32,7 @@
 	<mvc:resources location="/script/" mapping="/script/**" />
 	<mvc:resources location="/template/" mapping="/template/**" />
 	<mvc:resources location="/img/" mapping="/img/**" />
+	<mvc:resources location="/directives/" mapping="/directives/**" />
 	<mvc:resources location="/bower_components/" mapping="/bower_components/**" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

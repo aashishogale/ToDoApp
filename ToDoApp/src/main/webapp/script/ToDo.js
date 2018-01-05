@@ -29,6 +29,13 @@ ToDo.config([ '$stateProvider', '$urlRouterProvider',
             
 			})
 			
+			.state('trash', {
+				url : '/trash',
+				templateUrl : 'template/Trash.html',
+				controller:'noteController'
+            
+			})
+			
 			
 			
 			$urlRouterProvider.otherwise('login');

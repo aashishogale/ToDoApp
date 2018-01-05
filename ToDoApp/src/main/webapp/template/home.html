@@ -1,18 +1,22 @@
 
 
-<div class="navigate">
+<!-- <div class="navigate">
 	<nav class="navbar fixed-top navbar-default ">
-		<button id="collapsebutton" data-toggle="collapse"
-			data-target="#sidebar" class="navbar-toggle"></button>
+
+		<span class="glyphicon glyphicon-align-left">
+			<button id="sidebarCollapse" class="btn btn-info navbar-btn">
+
+			</button>
+		</span>
 	</nav>
 
-</div>
+</div> -->
+<navbar></navbar>
 
-<div class="wrapper" ng-click="hidenote=true">
+<div class="wrapper">
 
-	<nav id="sidebar"
-		class="navbar  fixed-left navbar-toggleable-md navbar-light bg-faded">
-		<div class="container-fluid collapse in" style="margin-top:95%;">
+	<!-- <nav id="sidebar" class="navbar  fixed-left">
+		<div class="container-fluid collapse in" style="margin-top: 95%;">
 			<div class="row">
 				<ul class="list-unstyled components">
 
@@ -50,8 +54,9 @@
 			</div>
 		</div>
 
-	</nav>
+	</nav> -->
 
+	<sidebar style="margin-top:10%"></sidebar>
 	<div class="container" style="margin-top: 10%;" ng-init="showthis=true">
 
 		<div class=bootcreate ng-show="showthis">
@@ -61,17 +66,27 @@
 			</div>
 		</div>
 		<div class="bootcreatenote" ng-show="show">
-			<div class="create-note col-md-6">
+			<div class="create-note col-md-6 ">
 				<div class="row noteadd">
-					<input type="text" ng-model="note.title" placeholder="Title"
-						class="Title">
+
+					<div ng-model="note.title" role="textbox"
+						style="width: 80%; outline: none;" aria-multiline="true"
+						contentEditable="true" class="addTitle" contenteditable
+						data-placeholder="title"></div>
 				</div>
+				<hr></hr>
 				<div class="row noteadd">
-					<input type="text" placeholder="Take a note"
-						ng-model="note.description" class="desc">
+
+
+					<div role="textbox" ng-model="note.description" class="addTitle"
+						style="width: 80%; outline: none" aria-multiline="true"
+						contentEditable="true" contentedittable
+						data-placeholder="take a note"></div>
 				</div>
+				<hr></hr>
 				<div class="row noteadd">
-					<input type="submit" ng-click="addNote();show=false;showthis=true"
+					<input type="submit"
+						ng-click="addNote(note);show=false;showthis=true"
 						class="noteenter">
 				</div>
 			</div>
@@ -79,30 +94,61 @@
 		</div>
 
 
-		<div id="notes" class="row" ng-show="allnotes" ng-init="allnotes=true;hidenote=true">
+<!-- 		<div id="notes" class="row collapsed">
+			
+				<div id="note" clicknote class="note-edit col-md-3 "
+					ng-repeat=" note in
+					noteList|orderBy
+					:'-date'|filter:{trash:false}|filter:{archive:false}"
+					ng-click="openCustomModal(note);">
 
-			<div id="note" class="note-edit  col-md-3"
-				ng-repeat="note in noteList|orderBy :'-date'|filter:{trash:false}|filter:{archive:false}"
-				ng-click="openCustomModal(note);hidenote=false" ng-show="hidenote">
 
+					<div class="row noteadd">
+						<div ng-model="note.title" role="textbox" class="Title"
+							aria-multiline="true" contentEditable="true" contenteditable
+							data-placeholder="{{note.title}}"></div>
+					</div>
+					<hr></hr>
+					<div class="row noteadd">
+						<div role="textbox" ng-model="note.description" class="desc "
+							aria-multiline="true" contentEditable="true" contentedittable
+							data-placeholder="{{note.description}}"></div>
+					</div>
 
-				<div class="row noteadd">
-					<input type="text" ng-model="note.title"
-						placeholder="{{note.title}}" class="Title">
 				</div>
-				<div class="row noteadd">
-					<input type="text" placeholder="{{note.description}}"
-						ng-model="note.description" class="desc">
-				</div>
-
 			</div>
 		</div>
+		
+		
+ -->
+ 
+ 
+
+
+	<div class="row collapsed">
+    <div  id="note" clicknote class="note-edit col-md-3 "
+					ng-repeat=" note in
+					noteList|orderBy
+					:'-date'|filter:{trash:false}|filter:{archive:false}"
+					ng-click="openCustomModal(note);">
+			   <div class="row noteadd">
+						<div ng-model="note.title" role="textbox" class="Title"
+							aria-multiline="true" contentEditable="true" contenteditable
+							data-placeholder="{{note.title}}"></div>
+					</div>
+					<hr></hr>
+					<div class="row noteadd">
+						<div role="textbox" ng-model="note.description" class="desc "
+							aria-multiline="true" contentEditable="true" contentedittable
+							data-placeholder="{{note.description}}"></div>
+					</div>
+  </div>
+</div>
 
 
 
 
-
-		<div id="trashnotes" class="row" ng-show="trashnote">
+		<!-- 	<div id="trashnotes" class="row" ng-show="trashnote">
 
 			<div id="note" class="note-edit  col-md-3"
 				ng-repeat="note in noteList|orderBy :'-date'|filter:{trash:true}|filter:{archive:false}"
@@ -110,19 +156,20 @@
 
 
 				<div class="row noteadd">
-					<input type="text" ng-model="note.title"
-						placeholder="{{note.title}}" class="Title">
+					<div ng-model="note.title" role="textbox" class="Title "
+						aria-multiline="true" contentEditable="true" contenteditable
+						data-placeholder="{{note.title}}"></div>
 				</div>
-				<div class="row noteadd">
-					<input type="text" placeholder="{{note.description}}"
-						ng-model="note.description" class="desc">
-				</div>
-
+				<div role="textbox" ng-model="note.description" class="desc"
+					aria-multiline="true" contentEditable="true" contentedittable
+					data-placeholder="{{note.description}}"></div>
 			</div>
 
-		</div>
-
-
+		</div> -->
 
 	</div>
+
+
+
+</div>
 </div>
