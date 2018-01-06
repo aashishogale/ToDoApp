@@ -19,7 +19,7 @@ button.btn-primary.btn-md.btn-login, button.btn-primary.btn-md.btn-register
 	padding: 14px 20px;
 	border: none;
 	cursor: pointer;
-	width: 50%;
+	width: 100%;
 }
 
 button.btn-primary.btn-md.btn-login {
@@ -32,7 +32,7 @@ button.btn-primary.btn-md.btn-login {
 	border: none;
 	cursor: pointer;
 	padding: 14px 20px;
-	width: 50%;
+	width: 100%;
 }
 
 .btn-google {
@@ -41,11 +41,14 @@ button.btn-primary.btn-md.btn-login {
 	border: none;
 	cursor: pointer;
 	padding: 14px 20px;
-	width: 50%;
+	width: 100%;
 }
 
 .psw {
 	margin-top: 5%
+}
+#psw,#email,#name,#number{
+	width:32%;
 }
 
 @media screen and (max-device-width: 480px) {

@@ -1,15 +1,16 @@
 <div id="editnote" class="flex-container">
 	<form>
 		<div class="form-group">
-			<div class="panel panel-default">
+			
 				<div class="row noteadd">
 
-					<div ng-model="data.title" role="textbox"
-						class="Title flex-container" aria-multiline="true"
-						contentEditable="true" contenteditable
-						data-placeholder="{{data.title}}"></div>
+<!-- 					<div ng-model="data.title" role="textbox" -->
+<!-- 						class="Title flex-container" aria-multiline="true" -->
+<!-- 						contentEditable="true" contenteditable -->
+<!-- 						data-placeholder="{{data.title}}"></div> -->
+<input type="text" ng-model=data.title placeholder="{{data.title}}" style="outline:none;border:0px;">
 				</div>
-			</div>
+		
 			<hr></hr>
 		</div>
 		<div class="form-group">
@@ -33,8 +34,8 @@
 			class="noteenter">
 
 	</div>
-	<div class="row noteadd">
-		<a ng-click="trashNote(data);close();" class="notetrash"> trash</a>
 
-	</div>
+		<i ng-click="trashNote(data);close();" class="notetrash glyphicon glyphicon-trash"> </i>
+<i ng-click="archiveNote(data);close();" class="glyphicon glyphicon-floppy-saved"></i>
+	
 </div>
