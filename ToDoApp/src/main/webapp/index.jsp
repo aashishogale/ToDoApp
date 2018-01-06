@@ -21,6 +21,7 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
 
 <!-- <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->

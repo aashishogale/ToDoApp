@@ -121,7 +121,16 @@ toDo.controller('noteController', function($scope, noteService, $uibModal) {
 				console.log(response.data);
 			})
 		}
+		  var that = this;
 
+		    this.isOpen = false;
+
+		    this.openCalendar = function(e) {
+		        e.preventDefault();
+		        e.stopPropagation();
+
+		        that.isOpen = true;
+		    };
 		$scope.trashNote = function(note) {
 			console.log(items);
 			var trashednote = noteService.service('POST', 'note/trashnote',

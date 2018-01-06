@@ -18,6 +18,7 @@
 	<context:property-placeholder location="classpath:mail.properties" />
 
 	<task:executor id="executorService" pool-size="10" />
+	
 
 	<!-- <bean id="mailSetter" class="com.bridgelabz.controller.MailSetter"></bean> -->
 
