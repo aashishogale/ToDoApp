@@ -1,4 +1,4 @@
-var ToDo = angular.module('ToDo', [ 'ui.router', 'ui.bootstrap' ,'ngSanitize','ui.bootstrap.datetimepicker'])
+var ToDo = angular.module('ToDo', [ 'ui.router', 'ui.bootstrap' ,'ngSanitize','ui.bootstrap.datetimepicker','toaster','toastr'])
 
 ToDo.config([ '$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {

@@ -68,6 +68,11 @@
 		
 							<div  ng-bind-html="note.description"></div>
 				</div>
+				
+				<div class="row noteadd">
+		
+							<div ng-model="note.reminder">{{note.reminder | date:'yyyy-MM-dd HH:mm:ss '}}</div>
+				</div>
 			</div>
 		
 		</div>
