@@ -22,7 +22,7 @@ public interface UserDao {
 
 	public User getUserById(int id);
 	public User registerSocial(User user);
-	 
+	 public User getUserByEmail(String email);
 	
 
 }

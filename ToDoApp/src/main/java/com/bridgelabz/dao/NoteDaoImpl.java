@@ -1,6 +1,8 @@
 package com.bridgelabz.dao;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -141,6 +143,32 @@ public class NoteDaoImpl implements NoteDao {
 		session.getTransaction().commit();
 		session.close();
 
+	}
+
+	public void addCollaborator(int id, User user) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		Collection<User> userlist=new HashSet<User>();
+		userlist=note.getCollaborator();
+		userlist.add(user);
+		note.setCollaborator(userlist);
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+		
+	}
+
+	public List<User> getCollaborator(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		List<User> userlist=(List<User>) note.getCollaborator();
+		session.close();
+		return userlist;
+
+		
 	}
 
 }

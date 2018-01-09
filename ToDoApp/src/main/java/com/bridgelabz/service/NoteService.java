@@ -28,5 +28,6 @@ public interface NoteService {
 	public void deleteReminder(int id);
 
 	public void setColor(int id, String color);
-
+	public void addCollaborator(int id,User user);
+	public List<User> getCollaborator(int id);
 }

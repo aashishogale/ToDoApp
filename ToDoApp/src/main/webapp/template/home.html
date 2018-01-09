@@ -6,7 +6,7 @@
 <div class="wrapper">
 	<sidebar></sidebar>
 
-	<div class="container"  ng-init="showthis=true">
+	<div class="container" ng-init="showthis=true">
 
 		<!-------------------------- createNote -------------------------------------------------------->
 
@@ -51,30 +51,33 @@
 
 
 
-		<div class="row collapsed">
-			<div id="note" clicknote class="note-edit col-lg-3"
+		<div class="row collapsed" id="display-notes">
+			<div id="note" clicknote
 				ng-repeat=" note in
 					noteList|orderBy
 					:'-date'|filter:{trash:false}|filter:{archive:false}"
-				ng-click="openCustomModal(note);">
+				ng-click="openCustomModal(note);" class="note-edit {{checked}} ">
 				<div class="row noteadd">
-			
-						<div  ng-bind-html="note.title"></div>
+
+					<div ng-bind-html="note.title"></div>
 				</div>
 
 
 				<hr></hr>
 				<div class="row noteadd">
-		
-							<div  ng-bind-html="note.description"></div>
+
+					<div ng-bind-html="note.description"></div>
 				</div>
 				
+
+			
 				<div class="row noteadd">
-		
-							<div ng-model="note.reminder">{{note.reminder | date:'yyyy-MM-dd HH:mm:ss '}}</div>
+
+					<div ng-model="note.reminder">{{note.reminder |
+						date:'yyyy-MM-dd HH:mm:ss '}}</div>
 				</div>
 			</div>
-		
+
 		</div>
 
 

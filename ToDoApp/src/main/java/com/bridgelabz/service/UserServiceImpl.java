@@ -147,6 +147,11 @@ public class UserServiceImpl implements UserService {
 		String token=redisTemplate.opsForValue().get("token");
 		return token ;
 	}
+
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userDao.getUserByEmail(email);
+	}
 	
 
 }

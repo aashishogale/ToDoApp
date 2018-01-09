@@ -61,7 +61,7 @@ a:hover {
 	display: inline-block;
 	margin-left: 8%;
 	visibility: visible;
-	width:230px;
+	/* width:230px; */
 
 	/*   padding: 1 box-shadow: none;*/
 	/*  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
@@ -76,7 +76,10 @@ a:hover {
 	margin-left: 4%;
 	visibility: visible;
 }
-
+.dropdown-menu{
+	width:max-content;
+	
+}
 #note:hover {
 	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.30);
 }
@@ -180,6 +183,7 @@ a:hover {
 	display: inline-table;
 }
 
-#notes.collapsed {
+#display-notes:active {
+	
 	
 }

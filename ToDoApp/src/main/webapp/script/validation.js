@@ -56,8 +56,8 @@ function checkvalid() {
 function checklogin(){
    var regex=/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/
       var  ctrl=document.getElementById("email");
-   	if (document.getElementById("email").value == "") {
-   		document.getElementById("pemail").innerHTML="email cannot be blank";
+  	if (document.getElementById("email").value == "") {
+  	document.getElementById("pemail").innerHTML="email cannot be blank";
    		//alert("Cannot leave email field blank");
    		return false;
    	}

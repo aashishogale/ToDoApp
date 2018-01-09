@@ -39,4 +39,6 @@ public interface UserService {
 
 	public void updateVerifyUser(User user);
 	public String getTokenFromRedis();
+	public User getUserByEmail(String email);
+	
 }

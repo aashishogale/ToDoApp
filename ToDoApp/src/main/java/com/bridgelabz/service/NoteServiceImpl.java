@@ -75,4 +75,15 @@ public class NoteServiceImpl implements NoteService {
 
 	}
 
+	public void addCollaborator(int id, User user) {
+		// TODO Auto-generated method stub
+	 notedao.addCollaborator( id, user);
+	}
+
+	public List<User> getCollaborator(int id) {
+		// TODO Auto-generated method stub
+		return notedao.getCollaborator(id);
+		
+	}
+
 }

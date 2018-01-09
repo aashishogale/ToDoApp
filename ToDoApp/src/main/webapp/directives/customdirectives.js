@@ -37,11 +37,30 @@ toDo.directive('sidebarcollapse', function($timeout) {
 	    link: function(scope, elem, attrs) {
 	   
 	      elem.on('click', function() {
-	        // This $timeout trick is necessary to run
-	        // the Angular digest cycle
+	      
 	        $timeout(function() {
 	        	var myEl = angular.element( document.querySelector( '#sidebar' ) );
 	       myEl.toggleClass('active');
+	        });
+	      });
+	    }
+	  };
+	});
+
+
+
+toDo.directive('changeview', function($timeout) {
+	  return {
+	    restrict: 'AE',
+	    link: function(scope, elem, attrs) {
+	   
+	      elem.on('click', function() {
+	     
+	        $timeout(function() {
+	      
+	       var newEl=angular.element( document.querySelector( '#note' ) );
+	       newEl.toggleClass('col-lg-9');
+	     
 	        });
 	      });
 	    }

@@ -8,8 +8,8 @@
 				<!-- 						class="Title flex-container" aria-multiline="true" -->
 				<!-- 						contentEditable="true" contenteditable -->
 				<!-- 						data-placeholder="{{data.title}}"></div> -->
-				<input type="text" ng-model=data.title placeholder="{{data.title}}"
-					style="outline: none; border: 0px;">
+				<input type="text" ng-model=note.title placeholder="{{note.title}}"
+					style="outline: none; border: 0px; box-shadow:none;">
 			</div>
 
 			<hr></hr>
@@ -17,10 +17,11 @@
 		<div class="form-group">
 			<div class="panel panel-default">
 				<div class="row noteadd">
-					<div ng-model="data.description" role="textbox"
+					<div ng-model="note.description" role="textbox"
 						class="desc flex-container" aria-multiline="true"
 						contentEditable="true" contenteditable
-						data-placeholder="{{data.description}}"></div>
+						data-placeholder="{{note.description}}"
+						style="box-shadow:none;"></div>
 				</div>
 			</div>
 		</div>
@@ -31,39 +32,42 @@
 </div>
 <div class="panel panel-default">
 	<div class="row noteadd">
-		<input type="submit" value="edit" ng-click="editNote(data);close();"
+		<!-- <input type="submit" value="edit" ng-click="editNote(data);close();"
 			class="noteenter"> <i ng-click="trashNote(data);close();"
 			class="notetrash glyphicon glyphicon-trash"> </i> <i
 			ng-click="archiveNote(data);close();"
-			class="glyphicon glyphicon-floppy-saved"></i>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Both</label>
-				<div class="col-sm-10">
-					<p class="input-group">
-						<!-- 	 <input type="text" class="form-control"
-							datetime-picker="MM/dd/yyyy HH:mm" ng-model="ctrl.date.value"
-							is-open="ctrl.date.showFlag" /> -->
-						<span class="input-group-btn" datetime-picker="MM/dd/yyyy HH:mm"
-							ng-model="data.reminder" is-open="ctrl.date.showFlag" >
-						<button type="button" class="btn btn-default"
-							ng-click="ctrl.date.showFlag = true">
-							<i class="fa fa-calendar"></i>
-						</button>
-						</span>
-					</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">model</label>
-				<div class="col-sm-10">
-					<!-- <input type="text" class="form-control-static" ng-model="data.reminder | date:'yyyy-MM-dd HH:mm:ss Z'"> -->
-					<span>{{data.reminder | date:'yyyy-MM-dd HH:mm:ss '}}</span>
-					<button type="button" class="btn btn-default" ng-click="setReminder(data);close();"></button>
-				</div>
-			</div>
-		</form>
+			class="glyphicon glyphicon-floppy-saved"></i> -->
 
 
+		<div class="col-sm-10">
+			<p class="input-group">
+
+				<span class="input-group-btn" datetime-picker="MM/dd/yyyy HH:mm"
+					ng-model="note.reminder" is-open="ctrl.date.showFlag"></span> <span
+					class="glyphicon glyphicon-calendar"
+					ng-click="ctrl.date.showFlag = true;editrem=true;"></span> <i
+					class="fa fa-calendar" ></i>
+			</p>
+
+
+		</div>
+		<i ng-click="trashNote(note);close();"
+			class="notetrash glyphicon glyphicon-trash"> </i> <i
+			ng-click="archiveNote(note);close();"
+			class="glyphicon glyphicon-floppy-saved"></i> <input type="submit"
+			value="edit" ng-click="editNote(note);close();" class="noteenter" >
 	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">reminder</label>
+		<div class="col-sm-10">
+			<!-- <input type="text" class="form-control-static" ng-model="data.reminder | date:'yyyy-MM-dd HH:mm:ss Z'"> -->
+			<span>{{data.reminder | date:'yyyy-MM-dd HH:mm:ss '}}</span>
+			<i class=	"glyphicon glyphicon-ok"
+				ng-click="setReminder(data);close();" ng-show="editrem"></i>
+		</div>
+	</div>
+
+
+
+</div>
 </div>

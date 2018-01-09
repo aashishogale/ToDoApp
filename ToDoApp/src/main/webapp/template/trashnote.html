@@ -4,10 +4,10 @@
 			<div class="panel panel-default">
 				<div class="row  noteadd">
 
-					<div ng-model="data.title" role="textbox"
+					<div ng-model="note.title" role="textbox"
 						class="Title flex-container" aria-multiline="true"
 						contentEditable="true" contenteditable
-						data-placeholder="{{data.title}}"></div>
+						note-placeholder="{{note.title}}"></div>
 				</div>
 			</div>
 			<hr></hr>
@@ -15,10 +15,10 @@
 		<div class="form-group">
 			<div class="panel panel-default">
 				<div class="row noteadd">
-					<div ng-model="data.description" role="textbox"
+					<div ng-model="note.description" role="textbox"
 						class="desc flex-container" aria-multiline="true"
 						contentEditable="true" contenteditable
-						data-placeholder="{{data.description}}"></div>
+						note-placeholder="{{note.description}}"></div>
 				</div>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 <div class="panel panel-default">
 
 	<div class="row noteadd">
-		<a ng-click="trashNote(data);close();" class="notetrash"> restore</a>
-		<a ng-click="deleteNote(data);close();" class="notetrash">deleteforever</a>
+		<a ng-click="trashNote(note);close();" class="notetrash"> restore</a>
+		<a ng-click="deleteNote(note);close();" class="notetrash">deleteforever</a>
 	</div>
 </div>
