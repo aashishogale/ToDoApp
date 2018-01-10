@@ -3,6 +3,7 @@ package com.bridgelabz.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,11 @@ import com.bridgelabz.model.User;
 public class NoteServiceImpl implements NoteService {
 	@Autowired
 	NoteDao notedao;
-	Date date = new Date();
+
+	private static final Logger logger = Logger.getLogger(NoteServiceImpl.class);
 
 	public void createNote(User user, Note note) {
-
+		Date date = new Date();
 		note.setDate(date);
 		notedao.createNote(user, note);
 
@@ -29,13 +31,15 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 	public void updateNote(Note note) {
+		Date date = new Date();
+		logger.info(date);
 		note.setDate(date);
 		notedao.updateNote(note);
 
 	}
 
-	public List<Note> getNoteList(User user) {
-		return notedao.getNoteList(user);
+	public List<Note> getNoteList(int id) {
+		return notedao.getNoteList(id);
 	}
 
 	public Note getNotebyId(int id) {
@@ -69,6 +73,17 @@ public class NoteServiceImpl implements NoteService {
 	public void setColor(int id, String color) {
 		notedao.setColor(id, color);
 
+	}
+
+	public void addCollaborator(int id, User user) {
+		// TODO Auto-generated method stub
+	 notedao.addCollaborator( id, user);
+	}
+
+	public List<User> getCollaborator(int id) {
+		// TODO Auto-generated method stub
+		return notedao.getCollaborator(id);
+		
 	}
 
 }

@@ -1,0 +1,28 @@
+<navbar></navbar>
+<div class="wrapper">
+	<sidebar></sidebar>
+	<div class="container" style="margin-top: 2%;">
+		<div class="row">
+
+			<div id="note-edit" class="note-edit col-md-3"
+				ng-repeat="note in noteList|orderBy :'-date'|filter:{trash:false}|filter:{archive:true}"
+				ng-click="openArchiveModal(note);">
+
+
+				<div class="row noteadd">
+					<!-- 	<div ng-model="note.title" role="textbox" class="Title "
+						aria-multiline="true" contentEditable="true" contenteditable
+						data-placeholder="{{note.title}}"></div> -->
+					<div ng-bind-html="note.title"></div>
+				</div>
+				<div class="row noteadd">
+					<!-- 	<div role="textbox" ng-model="note.description" class="desc"
+						aria-multiline="true" contentEditable="true" contentedittable
+						data-placeholder="{{note.description}}"></div> -->
+					<div ng-bind-html="note.description"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

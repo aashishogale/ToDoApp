@@ -1,0 +1,92 @@
+
+
+
+<navbar></navbar>
+
+<div class="wrapper">
+	<sidebar></sidebar>
+
+	<div class="container" ng-init="showthis=true">
+
+		<!-------------------------- createNote -------------------------------------------------------->
+
+
+		<div class=bootcreate ng-show="showthis">
+			<div class="show-create col-md-8"
+				ng-click="show=true; showthis=false">
+				<label>take a note</label>
+			</div>
+		</div>
+		<div class="bootcreatenote" ng-show="show">
+			<div class="create-note col-md-8">
+				<div class="row noteadd">
+
+					<div ng-model="note.title" role="textbox"
+						style="width: 80%; outline: none;" contentEditable="true"
+						class="addTitle" contenteditable data-placeholder="title"></div>
+				</div>
+				<hr></hr>
+				<div class="row noteadd">
+
+
+					<div role="textbox" ng-model="note.description" class="addTitle"
+						style="width: 80%; outline: none" aria-multiline="true"
+						contentEditable="true" contentedittable
+						data-placeholder="take a note"></div>
+				</div>
+				<hr></hr>
+				<div class="row noteadd">
+					<input type="submit"
+						ng-click="addNote(note);show=false;showthis=true"
+						class="noteenter">
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<!-------------------- display notes ------------------------------------->
+
+
+
+
+		<div class="row collapsed" id="display-notes">
+			<div id="note" clicknote
+				ng-repeat=" note in
+					noteList|orderBy
+					:'-date'|filter:{trash:false}|filter:{archive:false}"
+				ng-click="openCustomModal(note);" class="note-edit {{checked}} ">
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.title"></div>
+				</div>
+
+
+				<hr></hr>
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.description"></div>
+				</div>
+				
+
+			
+				<div class="row noteadd">
+
+					<div ng-model="note.reminder">{{note.reminder |
+						date:'yyyy-MM-dd HH:mm:ss '}}</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+	</div>
+
+
+
+</div>
+</div>

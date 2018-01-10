@@ -1,5 +1,7 @@
 package com.bridgelabz.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,19 +31,32 @@ public class Note {
 	@ManyToOne
 	@JoinColumn(name = "userid")
 	private User user;
+	@OneToMany
+	@JoinColumn(name = "colid")
+	private Collection<User> Collaborator = new ArrayList<User>();
 
-	@Column(name="pin")
+	public Collection<User> getCollaborator() {
+		return Collaborator;
+	}
+
+	public void setCollaborator(Collection<User> collaborator) {
+		Collaborator = collaborator;
+	}
+
+
+	@Column(name = "pin")
 	private boolean pin;
-	
-	@Column(name="archive")
+
+	@Column(name = "archive")
 	private boolean archive;
-	@Column(name="trash")
+	@Column(name = "trash")
 	private boolean trash;
-	@Column(name="reminder")
+	@Column(name = "reminder")
 	private Date reminder;
-	
-	@Column(name="color")
+
+	@Column(name = "color")
 	private String color;
+
 	public String getColor() {
 		return color;
 	}

@@ -17,12 +17,13 @@
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:mail.properties" />
 
-	<task:executor id="executorService" pool-size="10"/>
+	<task:executor id="executorService" pool-size="10" />
 	
+
 	<!-- <bean id="mailSetter" class="com.bridgelabz.controller.MailSetter"></bean> -->
 
 	<task:annotation-driven executor="executorService" />
-	
+
 	<mvc:annotation-driven />
 
 	<mvc:resources location="/css/" mapping="/css/**" />
@@ -31,6 +32,9 @@
 	<mvc:resources location="/controller/" mapping="/controller/**" />
 	<mvc:resources location="/script/" mapping="/script/**" />
 	<mvc:resources location="/template/" mapping="/template/**" />
+	<mvc:resources location="/img/" mapping="/img/**" />
+	<mvc:resources location="/directives/" mapping="/directives/**" />
+	<mvc:resources location="/bower_components/" mapping="/bower_components/**" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="encryptor"
@@ -80,7 +84,12 @@
 		<property name="keySerializer" ref="stringSerializer" />
 		<property name="valueSerializer" ref="stringSerializer" />
 	</bean>
-
+	
+	<bean id="fbConnection" class="com.bridgelabz.util.FBConnection">
+	</bean>
+	<bean id="googleConnection" class="com.bridgelabz.util.GoogleConnection">
+	</bean>
+	
 	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:host-name="localhost" p:port="6379" />

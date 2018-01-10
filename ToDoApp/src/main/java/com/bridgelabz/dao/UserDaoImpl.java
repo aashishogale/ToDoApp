@@ -28,9 +28,13 @@ public class UserDaoImpl implements UserDao {
 	private SessionFactory sessionFactory;
 
 	public boolean register(User user) {
-
-		String password = encryptor.encode(user.getPassword());
-		user.setPassword(password);
+		logger.info("register entered");
+		logger.info("user info" + user.getFname());
+		if (user.getPassword() != null) {
+			logger.info("password");
+			String password = encryptor.encode(user.getPassword());
+			user.setPassword(password);
+		}
 		Session session = sessionFactory.openSession();
 		if (this.getUserByEmail(user.getEmail()) == null) {
 			session.beginTransaction();
@@ -45,6 +49,25 @@ public class UserDaoImpl implements UserDao {
 			return false;
 
 		}
+
+	}
+
+	public User registerSocial(User user) {
+		logger.info("register entered");
+
+		Session session = sessionFactory.openSession();
+		if (this.getUserByEmail(user.getEmail()) == null) {
+			session.beginTransaction();
+
+			session.save(user);
+
+			session.getTransaction().commit();
+			System.out.println("Inserted Successfully");
+			session.close();
+			return user;
+		}
+
+		return this.getUserByEmail(user.getEmail());
 	}
 
 	public User validateUser(Login login) {

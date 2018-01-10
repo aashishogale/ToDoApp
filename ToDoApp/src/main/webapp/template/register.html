@@ -1,30 +1,88 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-<link type="text/css" rel="stylesheet" href="css/register.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<form action="">
-		<div class="container">
-			<label><b>Name</b></label> <input type="text"
-				placeholder="Enter name" name=required>
-				
-				 <label><b>Email</b></label>
-			<input type="text" placeholder="Enter Email" name="email" required ng-model="user.email">
+<div class="boxc">
+	<div class="container">
+		<div class="row">
+			<h3>Register page</h3>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<label><b>Name</b></label>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<input type="text" placeholder="aashish" name="name" id="name"
+					ng-model="user.fname" id="fname" 
+					class="form-control col-md-4">
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<p id="pfname"></p>
 
-			<label><b>Password</b></label> <input type="password"
-				placeholder="Enter Password" name="psw" required> 
-				<label><b>Number</b></label>
-			<input type="text" placeholder="Enter name" name=required> <label><b>Password</b></label>
-			
-			<div class="clearfix">
-				<button type="button" class="cancelbtn">Cancel</button>
-				<button type="submit" class="signupbtn">Sign Up</button>
 			</div>
 		</div>
-	</form>
-</body>
-</html>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<label><b>Email</b></label>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<input type="text" placeholder="xyz@gmail.com" name="email" required
+					ng-model="user.email" 
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email"
+					class="form-control col-md-4">
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<p id="pemail">
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<label><b>Password</b></label>
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<input type="password" placeholder="*******" name="psw" id="psw"
+						required ng-model="user.password" pattern=".{8,}"
+						class="form-control col-md-4">
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<p id="ppsw"></p>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<label><b>Number</b></label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<input type="text" placeholder="5654657467" name="number" id="number"
+						id="number" ng-model="user.number" pattern=".{10,}"
+						class="form-control col-md-4">
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<p id="pnumber"></p>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-3">
+					<button type="submit" class="signupbtn" ng-click="registerUser()"
+						onclick="return checkvalid()">Sign Up</button>
+				</div>
+				<div class="col-md-3">
+					<a href="#!/login">
+						<button type="button" class="signinbtn">Sign in</button>
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

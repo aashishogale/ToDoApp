@@ -1,6 +1,8 @@
 package com.bridgelabz.dao;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -56,11 +58,11 @@ public class NoteDaoImpl implements NoteDao {
 
 	}
 
-	public List<Note> getNoteList(User user) {
+	public List<Note> getNoteList(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query<Note> query = session.createQuery("from Note where userid=:id");
-		query.setParameter("id", user.getId());
+		query.setParameter("id", id);
 		List<Note> notes = query.getResultList();
 		return notes;
 
@@ -78,9 +80,9 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-	
+
 		note.setPin(!(note.isPin()));
-	
+
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
@@ -88,10 +90,11 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	public void trashNote(int id) {
+		logger.info("trash entered");
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-		note.setPin(!(note.isTrash()));
+		note.setTrash(!(note.isTrash()));
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
@@ -101,7 +104,7 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-		note.setPin(!(note.isArchive()));
+		note.setArchive(!(note.isArchive()));
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
@@ -118,11 +121,10 @@ public class NoteDaoImpl implements NoteDao {
 		session.getTransaction().commit();
 		session.close();
 
-		
 	}
 
 	public void deleteReminder(int id) {
-		
+
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
@@ -132,10 +134,41 @@ public class NoteDaoImpl implements NoteDao {
 		session.close();
 	}
 
-	public void setColor(int id,String color) {
+	public void setColor(int id, String color) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		note.setColor(color);
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
+	public void addCollaborator(int id, User user) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		Collection<User> userlist=new HashSet<User>();
+		userlist=note.getCollaborator();
+		userlist.add(user);
+		note.setCollaborator(userlist);
+		session.save(note);
+		session.getTransaction().commit();
+		session.close();
 		
 	}
 
-	
-	
+	public List<User> getCollaborator(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Note note = (Note) session.get(Note.class, id);
+		List<User> userlist=(List<User>) note.getCollaborator();
+		session.close();
+		return userlist;
+
+		
+	}
+
 }

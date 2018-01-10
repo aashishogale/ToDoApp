@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+.navbar.fixed-top {
+	background-color: #c3a010;
+	min-height: 60px;
+}
+
+.wrapper {
+	display: flex;
+	align-items: stretch;
+}
+
+#sidebar {
+	min-width: 250px;
+	max-width: 250px;
+	height: 100vh;
+	overflow: auto;
+	cursor:pointer;
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+	margin-left: 5px;
+}
+
+#sidebar.active {
+	margin-left: -250px;
+}
+
+.container-fluid {
+	flex: 0;
+	align-items: stretch;
+	margin-left: 1%;
+}
+
+
+
+a:hover {
+	background-color: #d4d4c6;
+}
+
+
+
+ ul li a {
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+	margin-left: 5px;
+} 
+
+
+
+#notes {
+	margin-top: 5%;
+}
+
+#note {
+	box-sizing: border-box;
+	margin-top: 5%;
+	border: none;
+	box-shadow: 0 2px 5px 0;
+	display: inline-block;
+	margin-left: 8%;
+	visibility: visible;
+	/* width:230px; */
+
+	/*   padding: 1 box-shadow: none;*/
+	/*  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
+}
+
+#note-edit {
+	box-sizing: border-box;
+	margin-top: 5%;
+	border: none;
+	box-shadow: 0 2px 5px 0;
+	display: inline-table;
+	margin-left: 4%;
+	visibility: visible;
+}
+.dropdown-menu{
+	width:max-content;
+	
+}
+#note:hover {
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.30);
+}
+
+.create-note {
+	box-shadow: 0 2px 5px 0;
+	box-sizing: border-box;
+	height: auto;
+}
+
+.show-create {
+	box-shadow: 0 2px 5px 0;
+	box-sizing: border-box;
+}
+
+.Title, .desc {
+	width: 90%;
+	outline: none;
+	margin: none;
+	background: transparent;
+}
+
+.noteadd {
+	margin-left: 4%;
+}
+
+.fade {
+	opacity: 1;
+	transition: opacity .15s linear;
+}
+
+.modal {
+	display: block;
+}
+
+.modal-backdrop {
+	z-index: 1040 !important;
+	filter: blur(20px);
+}
+
+.modal-dialog {
+	margin: 2px auto;
+	z-index: 1100 !important;
+	margin-top: 10%;
+}
+
+.modal-content {
+	margin-top: 5%;
+}
+
+.flex-container {
+	overflow-y: auto;
+	height: auto;
+}
+
+#sidebar.collapse {
+	display: none;
+}
+
+#editnote {
+	box-sizing: border-box;
+	border: none;
+	box-shadow: 0 2px 5px 0;
+	height: 270px;
+	width: 100%;
+}
+
+.noteenter {
+	background: transparent;
+	border: none;
+}
+
+.modal-open .container-fluid, .modal-open  .container {
+	-webkit-filter: blur(5px) grayscale(90%);
+}
+
+.desc:empty:before {
+	content: attr(data-placeholder);
+	color: gray;
+}
+
+.addTitle:empty:before {
+	content: attr(data-placeholder);
+	color: gray;
+}
+
+.Title:empty:before {
+	content: attr(data-placeholder);
+	color: gray;
+}
+
+.Title:before {
+	content: "";
+}
+
+.row.collapsed {
+	display: inline-table;
+}
+
+.note-edit {
+	display: inline-table;
+}
+
+#display-notes:active {
+	
+	
+}

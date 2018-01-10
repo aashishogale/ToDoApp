@@ -32,7 +32,7 @@ public class NoteController {
 	public ResponseEntity<Note> createNote(@RequestBody Note note, HttpServletRequest request) {
 
 		String token = (String) request.getHeader("token");
-
+		logger.info("create note" + note.getTitle());
 		if (userService.checkToken(token)) {
 			int id = userService.getidbyToken(token);
 			User user = userService.getUserById(id);
@@ -46,6 +46,7 @@ public class NoteController {
 	@RequestMapping(value = "updatenote", method = RequestMethod.POST)
 	public ResponseEntity<Note> updateNote(@RequestBody Note note, HttpServletRequest request) {
 		String token = (String) request.getHeader("token");
+		logger.info("update note" + note.getId());
 		if (userService.checkToken(token)) {
 			noteService.updateNote(note);
 			return new ResponseEntity<Note>(note, HttpStatus.OK);
@@ -67,10 +68,12 @@ public class NoteController {
 	}
 
 	@RequestMapping(value = "returnnotelist", method = RequestMethod.POST)
-	public ResponseEntity<List<Note>> getAllNotesbyUserId(@RequestBody User user, HttpServletRequest request) {
+	public ResponseEntity<List<Note>> getAllNotesbyUserId(HttpServletRequest request) {
+		logger.info("note entered");
 		String token = (String) request.getHeader("token");
 		if (userService.checkToken(token)) {
-			return new ResponseEntity<List<Note>>(noteService.getNoteList(user), HttpStatus.OK);
+			int id = userService.getidbyToken(token);
+			return new ResponseEntity<List<Note>>(noteService.getNoteList(id), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<List<Note>>(HttpStatus.CONFLICT);
 		}
@@ -164,6 +167,51 @@ public class NoteController {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
 
+	}
+
+	@RequestMapping(value = "getuserbyid", method = RequestMethod.POST)
+	public ResponseEntity<User> getuserbyid(HttpServletRequest request) {
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			User user = userService.getUserById(id);
+
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+		}
+
+	}
+	
+	@RequestMapping(value = "setcollaborator", method = RequestMethod.POST)
+	public ResponseEntity<String> setCollaborator(@RequestBody Note note , HttpServletRequest request) {
+		String token = (String) request.getHeader("token");
+		String email=(String)request.getHeader("email");
+		
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			User user = userService.getUserByEmail(email);
+			noteService.addCollaborator(note.getId(),user);
+
+			return new ResponseEntity<String>( HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		}
+
+	}
+	
+	@RequestMapping(value = "getcollaborator", method = RequestMethod.POST)
+	public ResponseEntity<List<User>> getCollaborator(@RequestBody Note note,HttpServletRequest request) {
+		logger.info("note entered");
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			return new ResponseEntity<List<User>>(noteService.getCollaborator(note.getId()), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<User>>(HttpStatus.CONFLICT);
+		}
 	}
 
 }

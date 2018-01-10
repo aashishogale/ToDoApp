@@ -1,70 +1,105 @@
-form {
-    border: 3px solid #f1f1f1;
-}
+/*  input[type=text], input[type=password] {
+	width: 40%;
+	padding: 12px 30px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+} */ 
 
-/* Full-width inputs */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-/* Add a hover effect for buttons */
 button:hover {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
-/* Extra style for the cancel button (red) */
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
+button.btn-primary.btn-md.btn-login, button.btn-primary.btn-md.btn-register
+	{
+	margin-top: 5%;
+	background-color: #f44336;
+	color: white;
+	padding: 14px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
 }
 
-/* Center the avatar image inside this container */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
+button.btn-primary.btn-md.btn-login {
+	background-color: #4CAF50;
 }
 
-/* Avatar image */
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
+.btn-facebook {
+	margin-top: 10%;
+	color: white;
+	border: none;
+	cursor: pointer;
+	padding: 14px 20px;
+	width: 100%;
 }
 
-/* Add padding to containers */
-.container {
-    padding: 16px;
+.btn-google {
+	margin-top: 10%;
+	color: white;
+	border: none;
+	cursor: pointer;
+	padding: 14px 20px;
+	width: 100%;
 }
 
-/* The "Forgot password" text */
-span.psw {
-    float: right;
-    padding-top: 16px;
+.psw {
+	margin-top: 5%
+}
+#psw,#email,#name,#number{
+	width:32%;
 }
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    .cancelbtn {
-        width: 100%;
-    }
+@media screen and (max-device-width: 480px) {
+	input[type=text], input[type=password] {
+		width: 100%;
+	/* 	padding: 8px 22px; */
+/* 		//margin: 8px 0; */
+		margin-top: 10%;
+		/* height:258px; */ '
+		display: inline-block;
+		border: 10px solid #ccc;
+		box-sizing: border-box;
+		display: inline-block;
+	}
+	label {
+		margin-top: 10%;
+		font-size: 30px;
+	}
+	button:hover {
+		opacity: 0.8;
+	}
+	button.btn-primary.btn-md.btn-login, button.btn-primary.btn-md.btn-register
+		{
+		margin-top: 5%;
+		background-color: #f44336;
+		color: white;
+		padding: 40px 100px;
+		border: none;
+		cursor: pointer;
+		width: 100%;
+	}
+	button.btn-primary.btn-md.btn-login {
+		background-color: #4CAF50;
+	}
+	/*.btn-facebook {
+		margin-top: 10%;
+		color: white;
+		border: none;
+		cursor: pointer;
+		padding: 50px 200px;
+		width: 50%;
+	}
+	.btn-google {
+		margin-top: 10%;
+		color: white;
+		border: none;
+		cursor: pointer;
+		padding: 140px 200px;
+		width: 50%;
+	}
+	.psw {
+		margin-top: 5%
+	} */
 }
