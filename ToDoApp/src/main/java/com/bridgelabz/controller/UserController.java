@@ -2,6 +2,7 @@ package com.bridgelabz.controller;
 
 import java.awt.Window;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bridgelabz.dao.UserDao;
 import com.bridgelabz.model.CustomResponse;
 import com.bridgelabz.model.Login;
+import com.bridgelabz.model.Note;
 import com.bridgelabz.model.User;
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.util.FBConnection;
@@ -187,6 +189,17 @@ public class UserController {
       return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="getUser",method=RequestMethod.POST)
+	public ResponseEntity<User> getUser(HttpServletRequest request) throws IOException {
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			return new ResponseEntity<User>(userService.getUserById(id), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+		}
+	
+	}
 	@RequestMapping(value="redirectGoogle",method=RequestMethod.GET)
 	public void redirectGoogle(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String code = request.getParameter("code");

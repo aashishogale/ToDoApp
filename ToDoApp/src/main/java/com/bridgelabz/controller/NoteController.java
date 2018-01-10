@@ -183,34 +183,50 @@ public class NoteController {
 		}
 
 	}
-	
+
 	@RequestMapping(value = "setcollaborator", method = RequestMethod.POST)
-	public ResponseEntity<String> setCollaborator(@RequestBody Note note , HttpServletRequest request) {
+	public ResponseEntity<String> setCollaborator(@RequestBody Note note, HttpServletRequest request) {
 		String token = (String) request.getHeader("token");
-		String email=(String)request.getHeader("email");
-		
+		String email = (String) request.getHeader("email");
+		logger.info(email);
+		logger.info(note.getId());
 		if (userService.checkToken(token)) {
 			int id = userService.getidbyToken(token);
 			User user = userService.getUserByEmail(email);
-			noteService.addCollaborator(note.getId(),user);
-
-			return new ResponseEntity<String>( HttpStatus.OK);
+			noteService.addCollaborator(note.getId(), user);
+            noteService.setCollabnotes(id, note);
+			return new ResponseEntity<String>(HttpStatus.OK);
 
 		} else {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
 
 	}
-	
+
 	@RequestMapping(value = "getcollaborator", method = RequestMethod.POST)
-	public ResponseEntity<List<User>> getCollaborator(@RequestBody Note note,HttpServletRequest request) {
+	public ResponseEntity<List<User>> getCollaborator(@RequestBody Note note, HttpServletRequest request) {
 		logger.info("note entered");
 		String token = (String) request.getHeader("token");
 		if (userService.checkToken(token)) {
 			int id = userService.getidbyToken(token);
+			logger.info(note.getId()+note.getTitle());
 			return new ResponseEntity<List<User>>(noteService.getCollaborator(note.getId()), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<List<User>>(HttpStatus.CONFLICT);
+		}
+	}
+	
+
+	@RequestMapping(value = "getcollabnotes", method = RequestMethod.POST)
+	public ResponseEntity<List<Note>> getCollabnotes(@RequestBody User user, HttpServletRequest request) {
+		logger.info("note entered");
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			logger.info(user.getId());
+			return new ResponseEntity<List<Note>>(noteService.getCollabnotes(user.getId()), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<Note>>(HttpStatus.CONFLICT);
 		}
 	}
 

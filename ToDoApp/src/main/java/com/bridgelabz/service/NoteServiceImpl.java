@@ -86,4 +86,14 @@ public class NoteServiceImpl implements NoteService {
 		
 	}
 
+	public void setCollabnotes(int id, Note note) {
+		// TODO Auto-generated method stub
+		notedao.setCollabnotes(id, note);
+	}
+
+	public List<Note> getCollabnotes(int id) {
+		// TODO Auto-generated method stub
+		return notedao.getCollabnotes(id);
+	}
+
 }

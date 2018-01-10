@@ -3,6 +3,7 @@ package com.bridgelabz.dao;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -64,6 +65,8 @@ public class NoteDaoImpl implements NoteDao {
 		Query<Note> query = session.createQuery("from Note where userid=:id");
 		query.setParameter("id", id);
 		List<Note> notes = query.getResultList();
+		
+		
 		return notes;
 
 	}
@@ -159,16 +162,50 @@ public class NoteDaoImpl implements NoteDao {
 		session.close();
 		
 	}
+	
 
 	public List<User> getCollaborator(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		logger.info(id);
 		Note note = (Note) session.get(Note.class, id);
+		System.out.println(note.getTitle());
 		List<User> userlist=(List<User>) note.getCollaborator();
+		
+		
 		session.close();
 		return userlist;
 
 		
 	}
 
+	public void setCollabnotes(int id,Note note) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		User user= (User) session.get(User.class, id);
+		Collection<Note> collabnotes=new HashSet<Note>();
+		collabnotes=user.getCollabNotes();
+		collabnotes.add(note);
+		user.setCollabNotes(collabnotes);
+		
+		session.save(user);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	
+	public List<Note> getCollabnotes(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		logger.info(id);
+		User user = (User) session.get(User.class, id);
+		System.out.println(user.getEmail());
+		List<Note> notelist=(List<Note>) user.getCollabNotes();
+		
+		
+		session.close();
+		return notelist;
+
+		
+	}
 }

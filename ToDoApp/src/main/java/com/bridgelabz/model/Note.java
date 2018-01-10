@@ -1,24 +1,35 @@
 package com.bridgelabz.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Note")
-public class Note {
+public class Note implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7825199198283216229L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	@Column(name = "noteid")
 	private int id;
 
@@ -31,10 +42,20 @@ public class Note {
 	@ManyToOne
 	@JoinColumn(name = "userid")
 	private User user;
-	@OneToMany
-	@JoinColumn(name = "colid")
-	private Collection<User> Collaborator = new ArrayList<User>();
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "colusernote",
+	joinColumns = {
+	@JoinColumn(name="notecolId") 
+	},
+	inverseJoinColumns = {
+	@JoinColumn(name="usercolId")
+	}
+	)
 
+
+	private Collection<User> Collaborator = new ArrayList<User>();
+	@JsonIgnore 
 	public Collection<User> getCollaborator() {
 		return Collaborator;
 	}

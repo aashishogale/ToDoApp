@@ -30,5 +30,7 @@ public interface NoteDao {
 	public void setColor(int id, String color);
 	public void addCollaborator(int id,User user);
 	public List<User> getCollaborator(int id);
+	public void setCollabnotes(int id,Note note);
+	public List<Note> getCollabnotes(int id);
 
 }

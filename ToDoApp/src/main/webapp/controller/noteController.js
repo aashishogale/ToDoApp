@@ -5,13 +5,13 @@ toDo
 						$interval, $filter, $state, $location, $uibModalStack,
 						$timeout) {
 
-					/*
-					 * $scope.checklogin = function() { if
-					 * (sessionStorage.getItem('token') == '') {
-					 * $state.go('/login'); } } checklogin();
-					 */
+				
+					
+					 
 
 					$scope.noteList = [];
+					$scope.userList = [];
+					
 
 					var getAllNotes = function() {
 						var listOfNote = noteService.service('POST',
@@ -20,20 +20,35 @@ toDo
 						listOfNote.then(function(response) {
 							console.log(response.data);
 							$scope.noteList = response.data;
+						
 							console.log("reminder"
 									+ $scope.noteList[1].reminder)
 
 						});
 
 					};
-					$scope.userList = [];
-					var getallCollaborators = function(note) {
+					
+					var getUser=function(){
+						var userget=noteService.service('POST','user/getUser');
+						userget.then(function(response){
+							$scope.user=response.data;
+							console.log($scope.user);
+						})
+					}
+					
+					$scope.logout=function(){
+						sessionStorage.removeItem('Token');
+						$location.path('#!/login');
+					}
+					$scope.getAllCollaborators = function(note) {
 						var getListUsers = noteService.service('POST',
 								'note/getcollaborator', note);
 						getListUsers.then(function(response) {
+							console.log(response.data);
 							$scope.userList = response.data;
 						})
 					}
+				
 					$scope.addCollaborators = function(note, email) {
 						var addCollaborators = noteService.service('POST',
 								'note/setcollaborator', note, email);
@@ -72,7 +87,7 @@ toDo
 						});
 					};
 					getAllNotes();
-
+				
 					interVal();
 					function interVal() {
 
@@ -132,6 +147,20 @@ toDo
 						});
 
 					}
+					
+					$scope.openCollabModal = function(note) {
+						$scope.note = note
+						$uibModal.open({
+							scope : $scope,
+
+							templateUrl : 'template/Collab.html',
+							parent : angular.element(document.body)
+
+						}).result.then(function() {
+						}, function(res) {
+						});
+
+					}
 
 					$scope.openTrashModal = function(note) {
 
@@ -166,8 +195,6 @@ toDo
 					$scope.close = function() {
 						$uibModalStack.dismissAll();
 					};
-
-					
 
 					$scope.deleteNote = function(note) {
 						var deletednote = noteService.service('POST',
