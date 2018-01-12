@@ -51,39 +51,44 @@
 
 
 
-		<div class="row collapsed" id="display-notes">
+		<div class="row collapsed col-lg-12" id="display-notes">
 			<div id="note" clicknote
 				ng-repeat=" note in
 					noteList|orderBy
 					:'-date'|filter:{trash:false}|filter:{archive:false}"
-				class="note-edit {{checked}} " data-ng-init="getAllCollaborators(note);">
-				<div class="row noteadd">
-
-					<div ng-bind-html="note.title" ng-click="openCustomModal(note);"></div>
-				</div>
+				class="{{checked}}">
+			
 
 
-				<hr></hr>
-				<div class="row noteadd">
+					<div class="row noteadd">
 
-					<div ng-bind-html="note.description"
-						ng-click="openCustomModal(note);"></div>
-				</div>
+						<div ng-bind-html="note.title" ng-click="openCustomModal(note);"></div>
+					</div>
 
 
+					<hr></hr>
+					<div class="row noteadd">
 
-				<div class="row noteadd">
+						<div ng-bind-html="note.description"
+							ng-click="openCustomModal(note);"></div>
+					</div>
 
-					<div ng-model="note.reminder">{{note.reminder |
-						date:'yyyy-MM-dd HH:mm:ss '}}</div>
-				</div>
-				<div class="row noteadd">
-					<div class="glyphicon glyphicon-send"
-						ng-click="openCollabModal(note)"></div>
-				</div>
-				<div class="row noteadd">
-					<div class="col-md-3" ng-repeat="user in userList ">{{user.email}}</div>
-				</div>
+
+
+					<div class="row noteadd">
+
+						<div ng-model="note.reminder">{{note.reminder |
+							date:'yyyy-MM-dd HH:mm:ss '}}</div>
+					</div>
+					<div class="row noteadd">
+						<div class="glyphicon glyphicon-send"
+							ng-click="openCollabModal(note)"></div>
+					</div>
+						<div data-ng-init="getAllCollaborators(note);">	</div>
+					<div class="row noteadd" ng-repeat="user in note.userList ">
+						<div>{{user.email}}</div>
+					</div>
+			
 			</div>
 		</div>
 	</div>

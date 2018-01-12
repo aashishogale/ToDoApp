@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.dao.NoteDao;
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.Note;
 import com.bridgelabz.model.User;
 
@@ -77,13 +78,13 @@ public class NoteServiceImpl implements NoteService {
 
 	public void addCollaborator(int id, User user) {
 		// TODO Auto-generated method stub
-	 notedao.addCollaborator( id, user);
+		notedao.addCollaborator(id, user);
 	}
 
-	public List<User> getCollaborator(int id) {
+	public List<User> getCollaborator(int id, User user) {
 		// TODO Auto-generated method stub
-		return notedao.getCollaborator(id);
-		
+		return notedao.getCollaborator(id, user);
+
 	}
 
 	public void setCollabnotes(int id, Note note) {
@@ -94,6 +95,22 @@ public class NoteServiceImpl implements NoteService {
 	public List<Note> getCollabnotes(int id) {
 		// TODO Auto-generated method stub
 		return notedao.getCollabnotes(id);
+	}
+
+	public void removeCollaborator(int id, User user) {
+
+		notedao.removeCollaborator(id, user);
+	}
+
+	public void createLabel(User user, Label label) {
+		notedao.createLabel(user, label);
+
+	}
+
+	public void attachLabelToNote(Note note, Label label) {
+		notedao.attachLabelToNote(note, label);
+		// TODO Auto-generated method stub
+		
 	}
 
 }

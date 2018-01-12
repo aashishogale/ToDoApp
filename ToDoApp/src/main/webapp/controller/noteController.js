@@ -11,7 +11,7 @@ toDo
 
 					$scope.noteList = [];
 					$scope.userList = [];
-					
+				
 
 					var getAllNotes = function() {
 						var listOfNote = noteService.service('POST',
@@ -41,19 +41,39 @@ toDo
 						$location.path('#!/login');
 					}
 					$scope.getAllCollaborators = function(note) {
+						note.userList=[];
 						var getListUsers = noteService.service('POST',
-								'note/getcollaborator', note);
+								'note/getcollaborator',note);
 						getListUsers.then(function(response) {
-							console.log(response.data);
-							$scope.userList = response.data;
+							
+							console.log("collaboarator"+response.data);
+							note.userList=response.data;
 						})
 					}
-				
+					
 					$scope.addCollaborators = function(note, email) {
+						
 						var addCollaborators = noteService.service('POST',
 								'note/setcollaborator', note, email);
 						addCollaborators.then(function(response) {
 							console.log(response.data);
+							$state.reload();
+							  
+						})
+					}
+					
+					$scope.removeCollaborators = function(note, user) {
+						var collabemail=user.email;
+						var email='';
+						
+					
+						var removeCollaborators = noteService.service('POST',
+								'note/removecollaborator', note, email,collabemail);
+						removeCollaborators.then(function(response) {
+							console.log("remove entered");
+							console.log(response.data);
+							$state.reload();
+							
 						})
 					}
 					$scope.addNote = function(note) {
@@ -107,13 +127,13 @@ toDo
 											new Date(), 'yyyy-MM-dd HH:mm Z');
 									console.log("current date" + currentDate);
 									console.log("reminderdate" + reminderdate);
-									if (reminderdate === currentDate) {
+									if (reminderdate === currentDate ||reminderdate < currentDate) {
 										console.log("toaster exeute");
 										toastr.success(
 												$scope.noteList[i].title,
 												'Reminder');
 										$scope.noteList[i].reminder = null;
-										editNote($scope.noteList[i]);
+									$scope.editNote($scope.noteList[i]);
 
 									}
 								}
@@ -123,14 +143,19 @@ toDo
 					}
 					;
 
-					$scope.checked = "col-lg-3";
+					$scope.checked = sessionStorage.getItem("column-size");
 					$scope.changeview = function() {
+						var type='';
 						if ($scope.checked == "col-lg-3") {
+							 
 							console.log($scope.checked);
-							$scope.checked = "col-lg-9"
+							$scope.checked = "col-lg-9";
+							sessionStorage.setItem("column-size","col-lg-9");
 							console.log($scope.checked);
 						} else {
+					
 							$scope.checked = "col-lg-3";
+							sessionStorage.setItem("column-size","col-lg-3");
 						}
 					}
 

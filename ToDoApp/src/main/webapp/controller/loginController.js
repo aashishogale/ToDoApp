@@ -5,6 +5,7 @@ toDo.controller('loginController', function($scope, loginService, $location) {
 		message.then(function(response) {
 			console.log(response.data);
 			sessionStorage.setItem("token", response.data.token);
+			sessionStorage.setItem("column-size","col-lg-3");
 			$location.path('/home');
 		}, function(response) {
 			$scope.error = response.data.message;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.Note;
 import com.bridgelabz.model.User;
 import com.bridgelabz.service.NoteService;
@@ -194,7 +195,49 @@ public class NoteController {
 			int id = userService.getidbyToken(token);
 			User user = userService.getUserByEmail(email);
 			noteService.addCollaborator(note.getId(), user);
-            noteService.setCollabnotes(id, note);
+      
+			return new ResponseEntity<String>(HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		}
+
+	}
+	
+	@RequestMapping(value = "addlabel", method = RequestMethod.POST)
+	public ResponseEntity<String> setCollaborator(@RequestBody Label label, HttpServletRequest request) {
+		String token = (String) request.getHeader("token");
+		String email = (String) request.getHeader("email");
+	
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			User user = userService.getUserByEmail(email);
+			noteService.createLabel(user, label);
+      
+			return new ResponseEntity<String>(HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		}
+
+	}
+	
+	@RequestMapping(value = "removecollaborator", method = RequestMethod.POST)
+	public ResponseEntity<String> removeCollaborator(@RequestBody Note note, HttpServletRequest request) {
+		String token = (String) request.getHeader("token");
+		String email = (String) request.getHeader("email");
+		String collabemail = (String) request.getHeader("collabemail");
+		logger.info("removel"+email);
+		logger.info(note.getId());
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			User user = userService.getUserByEmail(collabemail);
+			logger.warn(user.getEmail());
+			try {
+			noteService.removeCollaborator(note.getId(), user);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 			return new ResponseEntity<String>(HttpStatus.OK);
 
 		} else {
@@ -208,9 +251,10 @@ public class NoteController {
 		logger.info("note entered");
 		String token = (String) request.getHeader("token");
 		if (userService.checkToken(token)) {
-			int id = userService.getidbyToken(token);
+			int userid = userService.getidbyToken(token);
+			User user=userService.getUserById(userid); 
 			logger.info(note.getId()+note.getTitle());
-			return new ResponseEntity<List<User>>(noteService.getCollaborator(note.getId()), HttpStatus.OK);
+			return new ResponseEntity<List<User>>(noteService.getCollaborator(note.getId(),user), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<List<User>>(HttpStatus.CONFLICT);
 		}

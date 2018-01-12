@@ -39,6 +39,9 @@ public class Note implements Serializable{
 	private String description;
 	@Column(name = "date")
 	private Date date;
+/*	@OneToMany(mappedBy="note")
+	
+	private Collection<Label> label=new ArrayList<Label>();*/
 	@ManyToOne
 	@JoinColumn(name = "userid")
 	private User user;
@@ -52,8 +55,6 @@ public class Note implements Serializable{
 	@JoinColumn(name="usercolId")
 	}
 	)
-
-
 	private Collection<User> Collaborator = new ArrayList<User>();
 	@JsonIgnore 
 	public Collection<User> getCollaborator() {
@@ -72,6 +73,21 @@ public class Note implements Serializable{
 	private boolean archive;
 	@Column(name = "trash")
 	private boolean trash;
+/*	@Column(name = "reminderstatus")
+	private boolean reminderstatus=false;
+	public boolean isReminderstatus() {
+		return reminderstatus;
+	}
+
+	public void setReminderstatus(boolean reminderstatus) {
+		this.reminderstatus = reminderstatus;
+	}*/
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 	@Column(name = "reminder")
 	private Date reminder;
 
