@@ -63,6 +63,7 @@ public class NoteDaoImpl implements NoteDao {
 	}
 
 	public List<Note> getNoteList(int id) {
+		logger.info("dao entered");
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query<Note> query = session.createQuery("from Note where userid=:id");
@@ -72,6 +73,7 @@ public class NoteDaoImpl implements NoteDao {
 		List<Note> notes1 = criteria.list();
 		query.setParameter("id", id);
 		List<Note> notes = query.getResultList();
+		
 		// notes.removeAll(notes1);
 		notes.addAll(notes1);
 

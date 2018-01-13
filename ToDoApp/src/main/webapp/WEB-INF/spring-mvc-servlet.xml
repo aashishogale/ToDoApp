@@ -17,7 +17,7 @@
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:mail.properties" />
 
-	<task:executor id="executorService" pool-size="100" />
+	<task:executor id="executorService" pool-size="1000" />
 	
 
 	<!-- <bean id="mailSetter" class="com.bridgelabz.controller.MailSetter"></bean> -->

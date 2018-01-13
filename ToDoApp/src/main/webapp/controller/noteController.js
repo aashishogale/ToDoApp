@@ -9,7 +9,7 @@ toDo
 					$scope.noteList = [];
 					$scope.userList = [];
 					$scope.collaborators = [];
-
+                    $scope.emailList=[];
 					var getAllNotes = function() {
 						var listOfNote = noteService.service('POST',
 								'note/returnnotelist');
@@ -18,8 +18,7 @@ toDo
 							console.log(response.data);
 							$scope.noteList = response.data;
 
-							console.log("reminder"
-									+ $scope.noteList[1].reminder)
+	
 
 						});
 
@@ -38,8 +37,9 @@ toDo
 						sessionStorage.removeItem('Token');
 						$location.path('#!/login');
 					}
+					
 					$scope.getAllCollaborators = function(note) {
-				note.collaborators=[];
+				         note.collaborators=[];
 						var getListUsers = noteService.service('POST',
 								'note/getcollaborator', note);
 						getListUsers.then(function(response) {
@@ -196,16 +196,23 @@ toDo
 						});
 
 					}
-					$scope.add
+					$scope.cancelCollaborators=function(note,email){
+						var i=0
+						for(i; i < $scope.emailList.length; i++){
+							
+						}
+					}
 
 					$scope.addCollaborators = function(note, email) {
-
+                       
+                    $scope.emailList.push(email);
 						var addCollaborators = noteService.service('POST',
 								'note/setcollaborator', note, email);
 						addCollaborators.then(function(response) {
 						
 							$scope.getAllCollaborators(note);
 							$scope.email = "";
+							
 							console.log(response.data);
 
 						})
