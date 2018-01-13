@@ -1,0 +1,53 @@
+
+<navbar></navbar>
+
+<div class="wrapper">
+	<sidebar></sidebar>
+
+	<div class="container" ng-init="showthis=true">
+
+
+		<div class="row collapsed col-lg-12" id="display-notes">
+			<div id="note" clicknote
+				ng-repeat=" note in
+					noteList|orderBy
+					:'-date'|filter:{trash:false}|filter:{archive:false}|filter:{reminder:''}"
+				class="{{checked}}">
+
+
+
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.title" ng-click="openCustomModal(note);"></div>
+				</div>
+
+
+				<hr></hr>
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.description"
+						ng-click="openCustomModal(note);"></div>
+				</div>
+
+
+
+				<div class="row noteadd">
+
+					<div ng-model="note.reminder">{{note.reminder |
+						date:'yyyy-MM-dd HH:mm:ss '}}</div>
+				</div>
+				<div class="row noteadd">
+					<div class="glyphicon glyphicon-send"
+						ng-click="openCollabModal(note)"></div>
+				</div>
+				<div data-ng-init="getAllCollaborators(note);"></div>
+				<div class="row noteadd" ng-repeat="user in note.userList ">
+					<div>{{user.email}}</div>
+				</div>
+
+			</div>
+		</div>
+
+
+	</div>
+</div>

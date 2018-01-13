@@ -44,6 +44,7 @@ public class Note implements Serializable{
 	private Collection<Label> label=new ArrayList<Label>();*/
 	@ManyToOne
 	@JoinColumn(name = "userid")
+	@JsonIgnore
 	private User user;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
@@ -73,8 +74,9 @@ public class Note implements Serializable{
 	private boolean archive;
 	@Column(name = "trash")
 	private boolean trash;
-/*	@Column(name = "reminderstatus")
-	private boolean reminderstatus=false;
+	/*@Column(name = "reminderstatus")*/
+	
+	/*private boolean reminderstatus=false;
 	public boolean isReminderstatus() {
 		return reminderstatus;
 	}

@@ -78,18 +78,20 @@
 					<div class="row noteadd">
 
 						<div ng-model="note.reminder">{{note.reminder |
-							date:'yyyy-MM-dd HH:mm:ss '}}</div>
+							date:'yyyy-MM-dd HH:mm '}}</div>
 					</div>
 					<div class="row noteadd">
 						<div class="glyphicon glyphicon-send"
 							ng-click="openCollabModal(note)"></div>
 					</div>
 						<div data-ng-init="getAllCollaborators(note);">	</div>
-					<div class="row noteadd" ng-repeat="user in note.userList ">
-						<div>{{user.email}}</div>
+					<div class="row noteadd" ng-repeat="user in note.collaborators" >
+					 <div>{{user.email}}</div> 
 					</div>
 			
 			</div>
 		</div>
+		<!------------------------------->
+
 	</div>
 </div>

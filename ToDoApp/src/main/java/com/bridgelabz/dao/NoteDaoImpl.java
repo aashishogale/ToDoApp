@@ -126,7 +126,7 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-		note.setReminderstatus(true);
+	
 		note.setReminder(reminder);
 		logger.info(note.getReminder());
 		session.save(note);

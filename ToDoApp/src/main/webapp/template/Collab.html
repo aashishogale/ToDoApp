@@ -2,16 +2,17 @@
 	<form>
 		<div class="form-group">
 			<ul>
-				<li class=" row noteadd"   ng-repeat="user in note.userList">
-				<div class="col-lg-4"  ng-model="user" ng-bind-html="user.email"> </div><i
+				<li class=" row noteadd"   ng-repeat="user in note.collaborators">
+				<div class="col-lg-4"  ng-model="user" ">{{user.email}} </div><i
 					class="	col-lg-4 glyphicon glyphicon-remove"
 					ng-click="removeCollaborators(note,user);"></i>
 
                      </li>
-				<li class="row noteadd" "><input type="text" ng-model=email
+                     
+				<li class="row noteadd" "><input type="text" ng repeat="email in emails" ng-model=email
 					style="outline: none; border: 0px; box-shadow: none;" placeholder="enter collaborator"> <i
 					class="glyphicon glyphicon-ok"
-					ng-click="addCollaborators(note,email);"></i></li>
+					ng-click="addCollaborators(note,email);email=''"></i></li>
 
 			</ul>
 		</div>

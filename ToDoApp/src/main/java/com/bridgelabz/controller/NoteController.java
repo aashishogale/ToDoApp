@@ -106,6 +106,7 @@ public class NoteController {
 	@RequestMapping(value = "archivenote", method = RequestMethod.POST)
 	public ResponseEntity<String> archiveNote(@RequestBody Note note, HttpServletRequest request) {
 		String token = (String) request.getHeader("token");
+		logger.info("archive entered");
 		if (userService.checkToken(token)) {
 			noteService.archiveNote(note.getId());
 			return new ResponseEntity<String>(HttpStatus.OK);

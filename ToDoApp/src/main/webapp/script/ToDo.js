@@ -43,6 +43,13 @@ ToDo.config([ '$stateProvider', '$urlRouterProvider',
             
 			})
 			
+				.state('reminder', {
+				url : '/reminder',
+				templateUrl : 'template/Reminder.html',
+				controller:'noteController'
+            
+			})
+			
 			
 			
 			$urlRouterProvider.otherwise('login');
