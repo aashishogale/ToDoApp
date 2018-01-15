@@ -44,7 +44,7 @@ public class Note implements Serializable{
 	private Collection<Label> label=new ArrayList<Label>();*/
 	@ManyToOne
 	@JoinColumn(name = "userid")
-	@JsonIgnore
+	
 	private User user;
 	
 	@ManyToMany(fetch=FetchType.EAGER)

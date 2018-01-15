@@ -71,6 +71,7 @@ public class NoteController {
 	@RequestMapping(value = "returnnotelist", method = RequestMethod.POST)
 	public ResponseEntity<List<Note>> getAllNotesbyUserId(HttpServletRequest request) {
 		logger.info("note entered");
+		
 		String token = (String) request.getHeader("token");
 		if (userService.checkToken(token)) {
 			int id = userService.getidbyToken(token);
@@ -195,6 +196,12 @@ public class NoteController {
 		if (userService.checkToken(token)) {
 			int id = userService.getidbyToken(token);
 			User user = userService.getUserByEmail(email);
+			List<User> users=noteService.getCollaborator(note.getId(), user);
+			for(User checkuser:users) {
+				if(checkuser.getId()==user.getId()) {
+					return new ResponseEntity<String>(HttpStatus.CONFLICT);
+				}
+			}
 			noteService.addCollaborator(note.getId(), user);
       
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -272,6 +279,20 @@ public class NoteController {
 			return new ResponseEntity<List<Note>>(noteService.getCollabnotes(user.getId()), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<List<Note>>(HttpStatus.CONFLICT);
+		}
+	}
+	
+	@RequestMapping(value = "getemaillist", method = RequestMethod.POST)
+	public ResponseEntity<List<String>> getemaillist(HttpServletRequest request) {
+		
+		String token = (String) request.getHeader("token");
+		if (userService.checkToken(token)) {
+			int id = userService.getidbyToken(token);
+			User user=userService.getUserById(id);
+			logger.info(user.getId());
+			return new ResponseEntity<List<String>>(noteService.getEmailList(user), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<String>>(HttpStatus.CONFLICT);
 		}
 	}
 

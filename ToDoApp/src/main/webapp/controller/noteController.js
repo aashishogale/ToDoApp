@@ -9,7 +9,9 @@ toDo
 					$scope.noteList = [];
 					$scope.userList = [];
 					$scope.collaborators = [];
-                    $scope.emailList=[];
+					$scope.collaboratorlist = [];
+					$scope.emailList = [];
+					$scope.useremails = [];
 					var getAllNotes = function() {
 						var listOfNote = noteService.service('POST',
 								'note/returnnotelist');
@@ -17,8 +19,6 @@ toDo
 						listOfNote.then(function(response) {
 							console.log(response.data);
 							$scope.noteList = response.data;
-
-	
 
 						});
 
@@ -32,14 +32,15 @@ toDo
 							console.log($scope.user);
 						})
 					}
-
+					getUser();
 					$scope.logout = function() {
 						sessionStorage.removeItem('Token');
 						$location.path('#!/login');
 					}
-					
+
 					$scope.getAllCollaborators = function(note) {
-				         note.collaborators=[];
+						console.log(note);
+						note.collaborators = [];
 						var getListUsers = noteService.service('POST',
 								'note/getcollaborator', note);
 						getListUsers.then(function(response) {
@@ -47,14 +48,21 @@ toDo
 							console.log("collaboarator" + response.data);
 
 							note.collaborators = response.data;
-							
+
 							console.log(note.collaborators);
 
 						})
 					}
-
+					$scope.getemails = function() {
+						var getemail = noteService.service('POST',
+								'note/getemaillist')
+						getemail.then(function(response) {
+							$scope.useremails = response.data;
+						})
+					}
 					$scope.removeCollaborators = function(note, user) {
 						var collabemail = user.email;
+						console.log(collabemail);
 						var email = '';
 
 						var removeCollaborators = noteService.service('POST',
@@ -135,15 +143,11 @@ toDo
 											console.log("reminderdate"
 													+ reminderdate);
 											if (reminderdate === currentDate
-													|| reminderdate < currentDate) {
+													|| reminderdate < currentDate ||currentDate > reminderdate ) {
 												console.log("toaster exeute");
-												toastr
-														.success(
-																$scope.noteList[i].title,
-																'Reminder');
+												toastr.success($scope.noteList[i].title,'Reminder');
 
-												$scope
-														.deleteReminder($scope.noteList[i]);
+												$scope.deleteReminder($scope.noteList[i]);
 
 											}
 										}
@@ -196,23 +200,23 @@ toDo
 						});
 
 					}
-					$scope.cancelCollaborators=function(note,email){
-						var i=0
-						for(i; i < $scope.emailList.length; i++){
-							
+					$scope.cancelCollaborators = function(note, email) {
+						var i = 0
+						for (i; i < $scope.emailList.length; i++) {
+
 						}
 					}
 
 					$scope.addCollaborators = function(note, email) {
-                       
-                    $scope.emailList.push(email);
+
+						$scope.emailList.push(email);
 						var addCollaborators = noteService.service('POST',
 								'note/setcollaborator', note, email);
 						addCollaborators.then(function(response) {
-						
+
 							$scope.getAllCollaborators(note);
 							$scope.email = "";
-							
+
 							console.log(response.data);
 
 						})

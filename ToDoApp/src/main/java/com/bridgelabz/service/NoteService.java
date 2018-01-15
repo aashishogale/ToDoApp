@@ -36,4 +36,5 @@ public interface NoteService {
 	public void removeCollaborator(int id,User user);
 	public void createLabel(User user, Label label);
 	public void attachLabelToNote(Note note, Label label) ;
+	public List<String> getEmailList(User user);
 }

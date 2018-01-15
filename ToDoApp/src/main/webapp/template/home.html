@@ -3,22 +3,23 @@
 
 <navbar></navbar>
 
-<div class="wrapper">
-	<sidebar></sidebar>
 
-	<div class="container" ng-init="showthis=true">
+<sidebar></sidebar>
+<div class="wrapper" >
+	<div class="container" ng-init="showthis=true"
+		style="margin-top: 10%; margin-left: 15%;">
 
 		<!-------------------------- createNote -------------------------------------------------------->
 		<div class=row>
 
 			<div class=bootcreate ng-show="showthis">
-				<div class="show-create col-md-8"
+				<div class="show-create col-md-9"
 					ng-click="show=true; showthis=false">
 					<label>take a note</label>
 				</div>
 			</div>
 			<div class="bootcreatenote" ng-show="show">
-				<div class="create-note col-md-8">
+				<div class="create-note col-md-9">
 					<div class="row noteadd">
 
 						<div ng-model="note.title" role="textbox"
@@ -57,41 +58,69 @@
 					noteList|orderBy
 					:'-date'|filter:{trash:false}|filter:{archive:false}"
 				class="{{checked}}">
-			
 
 
-					<div class="row noteadd">
 
-						<div ng-bind-html="note.title" ng-click="openCustomModal(note);"></div>
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.title" ng-click="openCustomModal(note);"></div>
+				</div>
+
+
+				<hr></hr>
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.description"
+						ng-click="openCustomModal(note);" class="desc flex-container"></div>
+				</div>
+
+
+
+				<div class="row noteadd">
+
+					<div class="displayinfo" ng-model="note.reminder">{{note.reminder
+						| date:'MMM-dd HH:mm a '}}</div>
+				</div>
+
+
+
+				<div data-ng-init="getAllCollaborators(note);">
+
+					<div ng-if="user.email!=note.user.email">
+						<div>{{note.user.email}} (owner)</div>
+					</div>
+					<div class="row noteadd "
+						ng-repeat="collaborator in note.collaborators">
+
+						<div
+							ng-if="user.email!=collaborator.email && collaborator.email!=note.user.email">
+
+							<div class="displayinfo">
+								{{collaborator.email}}<span class="glyphicon glyphicon-remove"
+									ng-click="removeCollaborators(note,collaborator);"></span>
+							</div>
+						</div>
 					</div>
 
+				</div>
+				<div class="row noteadd">
 
-					<hr></hr>
-					<div class="row noteadd">
+					<span class="input-group-btn" style="width: 10px;"
+						datetime-picker="MM/dd/yyyy HH:mm" ng-model="note.reminder"
+						is-open="ctrl.date.showFlag"></span> <img src="img/reminder.svg"
+						style="width: 18px;"
+						ng-click="ctrl.date.showFlag = true;editrem=true;setReminder(note)"></img>
+					<i class="fa fa-calendar"></i> <img src="img/colloborator.svg"
+						ng-click="openCollabModal(note);getemails()" style="width: 18px;"></img>
 
-						<div ng-bind-html="note.description"
-							ng-click="openCustomModal(note);"></div>
-					</div>
+					<archivebutton></archivebutton>
+
+				</div>
 
 
 
-					<div class="row noteadd">
-
-						<div ng-model="note.reminder">{{note.reminder |
-							date:'yyyy-MM-dd HH:mm '}}</div>
-					</div>
-					<div class="row noteadd">
-						<div class="glyphicon glyphicon-send"
-							ng-click="openCollabModal(note)"></div>
-					</div>
-						<div data-ng-init="getAllCollaborators(note);">	</div>
-					<div class="row noteadd" ng-repeat="user in note.collaborators" >
-					 <div>{{user.email}}</div> 
-					</div>
-			
 			</div>
-		</div>
-		<!------------------------------->
+			<!------------------------------->
 
+		</div>
 	</div>
-</div>

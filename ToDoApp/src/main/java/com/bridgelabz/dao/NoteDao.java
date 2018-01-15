@@ -35,5 +35,5 @@ public interface NoteDao {
 	public void setCollabnotes(int id,Note note);
 	public List<Note> getCollabnotes(int id);
 	public void attachLabelToNote(Note note, Label label) ;
-
+	public List<String> getEmailList(User user);
 }

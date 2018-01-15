@@ -86,7 +86,7 @@ toDo.directive('trashbutton', function() {
 toDo.directive('archivebutton', function() {
 
 	return {
-		template : '<i ng-click="archiveNote(note);close();"'
-				+ 'class="glyphicon glyphicon-floppy-saved">' + '</i>'
+		template : '<img src="img/archive.svg" ng-click="archiveNote(note);close();"'
+				+ '>' + '</i>'
 	}
 })

@@ -113,4 +113,9 @@ public class NoteServiceImpl implements NoteService {
 		
 	}
 
+	public List<String> getEmailList(User user) {
+		// TODO Auto-generated method stub
+		return notedao.getEmailList(user);
+	}
+
 }

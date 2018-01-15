@@ -2,16 +2,22 @@
 	<form>
 		<div class="form-group">
 			<ul>
-				<li class=" row noteadd"   ng-repeat="user in note.collaborators">
-				<div class="col-lg-4"  ng-model="user" ">{{user.email}} </div><i
-					class="	col-lg-4 glyphicon glyphicon-remove"
-					ng-click="removeCollaborators(note,user);"></i>
+				<li class="row noteadd" ng-model="note.user.email"><div>{{note.user.email}}(Owner)</div></li>
+				<li class=" row noteadd"
+					ng-repeat="collaborator in note.collaborators">
+					<div ng-if="collaborator.email!=user.email">
+						<div class="col-lg-4" ng-model="user"">{{collaborator.email}}</div>
+						<i class="	col-lg-4 glyphicon glyphicon-remove"
+							ng-click="removeCollaborators(note,collaborator);"></i>
+					</div>
+				</li>
 
-                     </li>
-                     
-				<li class="row noteadd" "><input type="text" ng repeat="email in emails" ng-model=email
-					style="outline: none; border: 0px; box-shadow: none;" placeholder="enter collaborator"> <i
-					class="glyphicon glyphicon-ok"
+				<li class="row noteadd""><input type="text" ng
+					repeat="email in emails" ng-model=email
+					style="outline: none; border: 0px; box-shadow: none;"
+					placeholder="enter collaborator"
+					uib-typeahead="useremail for useremail in useremails| limitTo:8 ">
+					<i class="glyphicon glyphicon-ok"
 					ng-click="addCollaborators(note,email);email=''"></i></li>
 
 			</ul>
