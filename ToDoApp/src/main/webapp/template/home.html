@@ -5,12 +5,11 @@
 
 
 <sidebar></sidebar>
-<div class="wrapper" >
-	<div class="container" ng-init="showthis=true"
-		style="margin-top: 10%; margin-left: 15%;">
+<!-- <div class="wrapper" >  -->
+	<div class="container" ng-init="showthis=true" >
 
 		<!-------------------------- createNote -------------------------------------------------------->
-		<div class=row>
+		<div class="row col-md-8"  style="margin-top:15%; margin-left:20%;">
 
 			<div class=bootcreate ng-show="showthis">
 				<div class="show-create col-md-9"
@@ -46,19 +45,21 @@
 			</div>
 
 		</div>
+		
+		<!-- ----Pinned note        -->
+		
 
-		<!-------------------- display notes ------------------------------------->
-
-
-
-
-		<div class="row collapsed col-lg-12" id="display-notes">
+		<div class="row collapsed col-lg-12" id="display-notes" >
 			<div id="note" clicknote
 				ng-repeat=" note in
 					noteList|orderBy
-					:'-date'|filter:{trash:false}|filter:{archive:false}"
-				class="{{checked}}">
-
+					:'-date'|filter:{trash:false}|filter:{archive:false}|filter:{pin:true}"
+				class="{{checked}}" >
+                 <div class="row">
+                 <div class="col-lg-7">
+                 <pinbutton></pinbutton>
+                 </div>
+                 </div>
 
 
 				<div class="row noteadd">
@@ -113,7 +114,98 @@
 					<i class="fa fa-calendar"></i> <img src="img/colloborator.svg"
 						ng-click="openCollabModal(note);getemails()" style="width: 18px;"></img>
 
-					<archivebutton></archivebutton>
+					<archiveinpinbutton></archiveinpinbutton>
+
+				</div>
+
+
+
+			</div>
+		
+		
+
+		<!-------------------- display notes ------------------------------------->
+
+
+           <div class="row" ng-show="pin" ng-init="pin=false">Others</div>
+
+		<div class="row collapsed col-lg-12" id="display-notes" >
+			<div id="note" clicknote
+				ng-repeat=" note in
+					noteList|orderBy
+					:'-date'|filter:{trash:false}|filter:{archive:false}"
+				class="{{checked}}" >
+
+
+                 <div class="row">
+                 <div class="col-lg-7"></div>
+                 <pinbutton onclick="pin=true"></pinbutton></div>
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.title" ng-click="openCustomModal(note);"></div>
+				</div>
+
+
+				<hr></hr>
+				<div class="row noteadd">
+
+					<div ng-bind-html="note.description"
+						ng-click="openCustomModal(note);" class="desc flex-container"></div>
+				</div>
+
+
+
+				<div class="row noteadd">
+
+					<div class="displayinfo" ng-model="note.reminder">{{note.reminder
+						| date:'MMM-dd HH:mm a '}}</div>
+				</div>
+
+
+
+				<div data-ng-init="getAllCollaborators(note);">
+
+					<div ng-if="user.email!=note.user.email">
+						<div>{{note.user.email}} (owner)</div>
+					</div>
+					<div class="row noteadd "
+						ng-repeat="collaborator in note.collaborators">
+
+						<div
+							ng-if="user.email!=collaborator.email && collaborator.email!=note.user.email">
+
+							<div class="displayinfo">
+								{{collaborator.email}}<span class="glyphicon glyphicon-remove"
+									ng-click="removeCollaborators(note,collaborator);"></span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="row noteadd">
+
+					<span class="input-group-btn" style="width: 10px;"
+						datetime-picker="MM/dd/yyyy HH:mm" ng-model="note.reminder"
+						is-open="ctrl.date.showFlag"></span> <img src="img/reminder.svg"
+						style="width: 18px;"
+						ng-click="ctrl.date.showFlag = true;editrem=true;setReminder(note)"></img>
+					<i class="fa fa-calendar"></i> <img src="img/colloborator.svg"
+						ng-click="openCollabModal(note);getemails()" style="width: 18px;"></img>
+
+					<archivebutton ></archivebutton>
+					
+					
+					
+					<div class="btn dropdown-toggle" type="button"
+						data-toggle="dropdown">
+						<img src="color.svg">
+					</div>
+					<ul class="dropdown-menu container" role="menu" aria-labelledby="menu1">
+						<li class="row" ng-repeat="color in colors"> 
+						<div  class="img-circle" style="fill:"{color}"></div>
+					</ul>
+
+				</div>
 
 				</div>
 
@@ -123,4 +215,5 @@
 			<!------------------------------->
 
 		</div>
+ 	</div> 
 	</div>

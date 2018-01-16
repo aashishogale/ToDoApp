@@ -72,30 +72,32 @@ public class NoteDaoImpl implements NoteDao {
 		Criteria criteria = session.createCriteria(Note.class);
 		criteria.createAlias("Collaborator", "c");
 		criteria.add(Restrictions.eq("c.id", id));
-		List<Note> notes1 =  criteria.list();
-		Set<Note> noteset=new HashSet<Note>(notes1);
-		System.out.println("is the list empty"+notes1.isEmpty());
+		List<Note> notes1 = criteria.list();
+		Set<Note> noteset = new HashSet<Note>(notes1);
+		System.out.println("is the list empty" + notes1.isEmpty());
 		query.setParameter("id", id);
 		List<Note> notes = (List<Note>) query.getResultList();
-		Set<Note> noteset1=new HashSet<Note>(notes);
+		Set<Note> noteset1 = new HashSet<Note>(notes);
 		notes.clear();
 		noteset.addAll(noteset1);
-	
-		for(Note ownernote:notes) {
-			System.out.println("owned note"+ownernote.getId());
-		}
-		
-		for(Note collabnote:notes1) {
-			System.out.println("collaborated note" +collabnote.getId());
-		}
-	
-		/*System.out.println("second note"+notes.get(1).getId());*/
-/*		System.out.println( "colla borated first note"+notes1.get(0).getId());
-		System.out.println(" collaborated second note"+notes1.get(1).getId());*/
 
-		//System.out.print("operation done"+notes.removeAll(notes1));
+		for (Note ownernote : notes) {
+			System.out.println("owned note" + ownernote.getId());
+		}
+
+		for (Note collabnote : notes1) {
+			System.out.println("collaborated note" + collabnote.getId());
+		}
+
+		/* System.out.println("second note"+notes.get(1).getId()); */
+		/*
+		 * System.out.println( "colla borated first note"+notes1.get(0).getId());
+		 * System.out.println(" collaborated second note"+notes1.get(1).getId());
+		 */
+
+		// System.out.print("operation done"+notes.removeAll(notes1));
 		notes.addAll(noteset);
-        System.out.println("no of notes"+notes.size());
+		System.out.println("no of notes" + notes.size());
 		return notes;
 
 	}
@@ -112,9 +114,9 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-
+		logger.warn("pin entered");
 		note.setPin(!(note.isPin()));
-
+logger.warn("note pin status"+note.isPin());
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
@@ -137,6 +139,9 @@ public class NoteDaoImpl implements NoteDao {
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
 		note.setArchive(!(note.isArchive()));
+		if(note.isPin()&&note.isArchive()) {
+			note.setPin(false);
+		}
 		session.save(note);
 		session.getTransaction().commit();
 		session.close();
@@ -147,7 +152,7 @@ public class NoteDaoImpl implements NoteDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Note note = (Note) session.get(Note.class, id);
-	
+
 		note.setReminder(reminder);
 		logger.info(note.getReminder());
 		session.save(note);
@@ -185,8 +190,8 @@ public class NoteDaoImpl implements NoteDao {
 		Note note = (Note) session.get(Note.class, id);
 		Collection<User> userlist = new HashSet<User>();
 		userlist = note.getCollaborator();
-		if(userlist.isEmpty()) {
-			User owner=(User)note.getUser();
+		if (userlist.isEmpty()) {
+			User owner = (User) note.getUser();
 			userlist.add(owner);
 		}
 		userlist.add(user);
@@ -204,13 +209,11 @@ public class NoteDaoImpl implements NoteDao {
 		Note note = (Note) session.get(Note.class, id);
 		System.out.println(note.getTitle());
 		List<User> userlist = (List<User>) note.getCollaborator();
-	/*	for (int i = 0; i < userlist.size(); i++) {
-			User usercheck = userlist.get(i);
-			logger.warn("usercheck entered" + user.getEmail());
-			if (usercheck.getId() == user.getId()) {
-				userlist.remove(i);
-			}
-		}*/
+		/*
+		 * for (int i = 0; i < userlist.size(); i++) { User usercheck = userlist.get(i);
+		 * logger.warn("usercheck entered" + user.getEmail()); if (usercheck.getId() ==
+		 * user.getId()) { userlist.remove(i); } }
+		 */
 
 		logger.info(user.getId());
 		session.close();
@@ -266,45 +269,41 @@ public class NoteDaoImpl implements NoteDao {
 		session.save(label);
 		session.getTransaction().commit();
 		session.close();
-		
 
 	}
 
 	public void attachLabelToNote(Note note, Label label) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public List<String> getEmailList(User user) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-	
 
-		Query query=session.createQuery("FROM User");
-		List<User> users=query.getResultList();
-		List<String> emails=new ArrayList<String>();
-		for(User getuser:users) {
-			if(getuser.getId()!=user.getId()) {
-			emails.add(getuser.getEmail());
+		Query query = session.createQuery("FROM User");
+		List<User> users = query.getResultList();
+		List<String> emails = new ArrayList<String>();
+		for (User getuser : users) {
+			if (getuser.getId() != user.getId()) {
+				emails.add(getuser.getEmail());
+			}
 		}
-		}
-		
+
 		session.getTransaction().commit();
-	return emails;
+		return emails;
 	}
-	
-	/*public void attachLabelToNote(Note note, Label label) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		Label updatedlabel= (Label)session.get(Label.class, label.getId());
-		label.setNote(note);
-		session.update(updatedlabel);
-		session.getTransaction().commit();
-		session.close();
-		
 
-	}*/
+	/*
+	 * public void attachLabelToNote(Note note, Label label) { Session session =
+	 * sessionFactory.openSession(); session.beginTransaction(); Label updatedlabel=
+	 * (Label)session.get(Label.class, label.getId()); label.setNote(note);
+	 * session.update(updatedlabel); session.getTransaction().commit();
+	 * session.close();
+	 * 
+	 * 
+	 * }
+	 */
 
-	
 }

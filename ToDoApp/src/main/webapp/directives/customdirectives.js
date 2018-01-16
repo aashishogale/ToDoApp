@@ -83,10 +83,43 @@ toDo.directive('trashbutton', function() {
 	}
 })
 
+
+toDo.directive('pinbutton', function() {
+
+	return {
+		template : ' <img src="img/pin.svg" ng-click="pinNote(note);pin=true;"'
+				+ '>' + '</img>'
+	}
+})
+
+
+toDo.directive('pininarchivebutton', function() {
+
+	return {
+		template : ' <img src="img/pin.svg" ng-click="pinNote(note);archiveNote(note);"'
+				+ '>' + '</img>'
+	}
+})
+
+toDo.directive('archiveinpinbutton', function() {
+
+	return {
+		template : ' <img src="img/archive.svg" ng-click="archiveNote(note);pinNote(note);"'
+				+ '>' + '</img>'
+	}
+})
+
+toDo.directive('unarchivebutton', function() {
+
+	return {
+		template : ' <img src="img/unarchive.svg" ng-click="archiveNote(note);"'
+				+ '>' + '</img>'
+	}
+})
 toDo.directive('archivebutton', function() {
 
 	return {
-		template : '<img src="img/archive.svg" ng-click="archiveNote(note);close();"'
+		template : '<img src="img/archive.svg" ng-click="archiveNote(note);"'
 				+ '>' + '</i>'
 	}
 })

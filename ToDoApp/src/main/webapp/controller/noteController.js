@@ -24,6 +24,46 @@ toDo
 
 					};
 
+				$scope.colors=[
+						{
+						color="#fff"
+					},
+					{
+						
+						color="#ff8a80"
+					},{
+						color="#ffd180"
+					},
+					{
+						color="#ffff8d"
+					},
+					{
+						color="#ccff90"
+					},
+					{
+						color="a7ffeb"
+					},
+					{
+					color="#80d8ff"	
+					},
+					{
+						color="#82b1ff"
+					},
+					{
+						color="#b388ff"
+					},
+					{
+						color="#f8bbd0"
+					},
+					{
+						color="#d7ccc8"
+					},{
+						color="#cfd8dc"
+					}
+						
+					]
+					
+					
 					var getUser = function() {
 						var userget = noteService.service('POST',
 								'user/getUser');
@@ -289,6 +329,17 @@ toDo
 								'note/archivenote', note);
 						archivednote.then(function(response) {
 							console.log(response.data);
+							$state.reload();
+
+						});
+					};
+					
+					$scope.pinNote = function(note) {
+						var pinnednote = noteService.service('POST',
+								'note/pinnote', note);
+						pinnednote.then(function(response) {
+							console.log(response.data);
+							$state.reload();
 
 						});
 					};

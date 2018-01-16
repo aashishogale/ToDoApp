@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
-.navbar.fixed-top {
-	background-color: #fb0;
-	min-height: 60px;
+.navbar-fixed-top {
+ 	background-color: #fb0; 
+/* 	min-height: 60px;
+	
 	position: fixed;
 	width:100%;
-	background:solid;
+	background:solid; */
 }
 
 .wrapper {
@@ -40,7 +41,11 @@
 	align-items: stretch;
 	margin-left: 1%;
 }
-
+.container{
+	    margin-left: 20%;
+  
+    width: 970px;
+}
 .displayinfo {
 	background-color: rgba(0, 0, 0, 0.08);
 	-webkit-border-radius: 2px;

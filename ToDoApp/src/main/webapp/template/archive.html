@@ -5,23 +5,64 @@
 		<div class="row">
 
 			<div id="note-edit" class="note-edit col-md-3"
-				ng-repeat="note in noteList|orderBy :'-date'|filter:{trash:false}|filter:{archive:true}"
-				ng-click="openArchiveModal(note);">
+				ng-repeat="note in noteList|orderBy :'-date'|filter:{trash:false}|filter:{archive:true}">
 
-
+                <div class="row">
+                 <div class="col-lg-7"></div>
+                 <pininarchivebutton></pininarchivebutton></div>
 				<div class="row noteadd">
 					<!-- 	<div ng-model="note.title" role="textbox" class="Title "
 						aria-multiline="true" contentEditable="true" contenteditable
 						data-placeholder="{{note.title}}"></div> -->
-					<div ng-bind-html="note.title"></div>
+					<div ng-bind-html="note.title"  ng-click="openCustomModal(note);"></div>
 				</div>
 				<div class="row noteadd">
 					<!-- 	<div role="textbox" ng-model="note.description" class="desc"
 						aria-multiline="true" contentEditable="true" contentedittable
 						data-placeholder="{{note.description}}"></div> -->
-					<div ng-bind-html="note.description"></div>
+					<div ng-bind-html="note.description" ng-click="openCustomModal(note);"></div>
+				</div>
+ 
+				<div class="row noteadd">
+
+					<div class="displayinfo" ng-model="note.reminder">{{note.reminder
+						| date:'MMM-dd HH:mm a '}}</div>
 				</div>
 
+
+
+				<div data-ng-init="getAllCollaborators(note);">
+
+					<div ng-if="user.email!=note.user.email">
+						<div>{{note.user.email}} (owner)</div>
+					</div>
+					<div class="row noteadd "
+						ng-repeat="collaborator in note.collaborators">
+
+						<div
+							ng-if="user.email!=collaborator.email && collaborator.email!=note.user.email">
+
+							<div class="displayinfo">
+								{{collaborator.email}}<span class="glyphicon glyphicon-remove"
+									ng-click="removeCollaborators(note,collaborator);"></span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="row noteadd">
+
+					<span class="input-group-btn" style="width: 10px;"
+						datetime-picker="MM/dd/yyyy HH:mm" ng-model="note.reminder"
+						is-open="ctrl.date.showFlag"></span> <img src="img/reminder.svg"
+						style="width: 18px;"
+						ng-click="ctrl.date.showFlag = true;editrem=true;setReminder(note)"></img>
+					<i class="fa fa-calendar"></i> <img src="img/colloborator.svg"
+						ng-click="openCollabModal(note);getemails()" style="width: 18px;"></img>
+
+					<unarchivebutton></unarchivebutton>
+
+				</div>
 			</div>
 		</div>
 	</div>
