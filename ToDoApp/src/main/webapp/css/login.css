@@ -47,7 +47,7 @@ button.btn-primary.btn-md.btn-login {
 .psw {
 	margin-top: 5%
 }
-#psw,#email,#name,#number{
+#psw,#email,#fname,#number{
 	width:32%;
 }
 

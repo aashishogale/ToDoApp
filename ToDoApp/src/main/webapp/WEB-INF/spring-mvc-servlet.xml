@@ -17,12 +17,12 @@
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:mail.properties" />
 
-	<task:executor id="executorService" pool-size="10" />
+<!-- 	<task:executor id="executorService" pool-size="1000" /> -->
 	
 
 	<!-- <bean id="mailSetter" class="com.bridgelabz.controller.MailSetter"></bean> -->
 
-	<task:annotation-driven executor="executorService" />
+	<!-- <task:annotation-driven executor="executorService" /> -->
 
 	<mvc:annotation-driven />
 
@@ -53,8 +53,8 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 
-		<property name="initialSize" value="20" />
-		<property name="maxActive" value="30" />
+		<property name="initialSize" value="200" />
+		<property name="maxActive" value="-1" />
 
 	</bean>
 	<bean id="transactionManager"

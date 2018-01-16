@@ -9,7 +9,7 @@
 				<!-- 						contentEditable="true" contenteditable -->
 				<!-- 						data-placeholder="{{data.title}}"></div> -->
 				<input type="text" ng-model=note.title placeholder="{{note.title}}"
-					style="outline: none; border: 0px; box-shadow:none;">
+					style="outline: none; border: 0px; box-shadow: none;">
 			</div>
 
 			<hr></hr>
@@ -20,8 +20,7 @@
 					<div ng-model="note.description" role="textbox"
 						class="desc flex-container" aria-multiline="true"
 						contentEditable="true" contenteditable
-						data-placeholder="{{note.description}}"
-						style="box-shadow:none;"></div>
+						data-placeholder="{{note.description}}" style="box-shadow: none;"></div>
 				</div>
 			</div>
 		</div>
@@ -32,11 +31,7 @@
 </div>
 <div class="panel panel-default">
 	<div class="row noteadd">
-		<!-- <input type="submit" value="edit" ng-click="editNote(data);close();"
-			class="noteenter"> <i ng-click="trashNote(data);close();"
-			class="notetrash glyphicon glyphicon-trash"> </i> <i
-			ng-click="archiveNote(data);close();"
-			class="glyphicon glyphicon-floppy-saved"></i> -->
+		
 
 
 		<div class="col-sm-10">
@@ -46,24 +41,31 @@
 					ng-model="note.reminder" is-open="ctrl.date.showFlag"></span> <span
 					class="glyphicon glyphicon-calendar"
 					ng-click="ctrl.date.showFlag = true;editrem=true;"></span> <i
-					class="fa fa-calendar" ></i>
+					class="fa fa-calendar"></i>
 			</p>
 
 
 		</div>
-		<i ng-click="trashNote(note);close();"
-			class="notetrash glyphicon glyphicon-trash"> </i> <i
-			ng-click="archiveNote(note);close();"
-			class="glyphicon glyphicon-floppy-saved"></i> <input type="submit"
-			value="edit" ng-click="editNote(note);close();" class="noteenter" >
+		
+		<div class="row noteadd">
+			<span ng-if="user.email==note.user.email">
+
+				<archivebutton></archivebutton>
+				<trashbutton></trashbutton>
+			</span>
+
+			<editbutton></editbutton>
+
+		</div>
+
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">reminder</label>
 		<div class="col-sm-10">
 			<!-- <input type="text" class="form-control-static" ng-model="data.reminder | date:'yyyy-MM-dd HH:mm:ss Z'"> -->
-			<span>{{data.reminder | date:'yyyy-MM-dd HH:mm:ss '}}</span>
-			<i class=	"glyphicon glyphicon-ok"
-				ng-click="setReminder(data);close();" ng-show="editrem"></i>
+			<span>{{note.reminder | date:'yyyy-MM-dd HH:mm:ss '}}</span> <i
+				class="glyphicon glyphicon-ok" ng-click="setReminder(note);close();"
+				ng-show="editrem"></i>
 		</div>
 	</div>
 

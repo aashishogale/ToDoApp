@@ -1,68 +1,125 @@
 var toDo = angular.module('ToDo');
-toDo.directive('sidebar',function(){
-	return{
-		templateUrl:'template/sidebar.html'
+toDo.directive('sidebar', function() {
+	return {
+		templateUrl : 'template/sidebar.html'
 	}
 })
 
-toDo.directive('navbar',function(){
-	return{
-		templateUrl:'template/navbar.html'
+toDo.directive('navbar', function() {
+	return {
+		templateUrl : 'template/navbar.html'
 	}
 })
-
-
 
 toDo.directive('clicknote', function($timeout) {
-  return {
-    restrict: 'AE',
-    link: function(scope, elem, attrs) {
-   
-      elem.on('click', function() {
-        // This $timeout trick is necessary to run
-        // the Angular digest cycle
-        $timeout(function() {
-         elem.css("max-height","450px");
-       
-        });
-      });
-    }
-  };
+	return {
+		restrict : 'AE',
+		link : function(scope, elem, attrs) {
+
+			elem.on('click', function() {
+				// This $timeout trick is necessary to run
+				// the Angular digest cycle
+				$timeout(function() {
+					elem.css("max-height", "450px");
+
+				});
+			});
+		}
+	};
 });
 
-
 toDo.directive('sidebarcollapse', function($timeout) {
-	  return {
-	    restrict: 'AE',
-	    link: function(scope, elem, attrs) {
-	   
-	      elem.on('click', function() {
-	      
-	        $timeout(function() {
-	        	var myEl = angular.element( document.querySelector( '#sidebar' ) );
-	       myEl.toggleClass('active');
-	        });
-	      });
-	    }
-	  };
-	});
+	return {
+		restrict : 'AE',
+		link : function(scope, elem, attrs) {
 
+			elem.on('click', function() {
 
+				$timeout(function() {
+					var myEl = angular.element(document
+							.querySelector('#sidebar'));
+					myEl.toggleClass('active');
+				});
+			});
+		}
+	};
+});
 
 toDo.directive('changeview', function($timeout) {
-	  return {
-	    restrict: 'AE',
-	    link: function(scope, elem, attrs) {
-	   
-	      elem.on('click', function() {
-	     
-	        $timeout(function() {
-	      
-	       var newEl=angular.element( document.querySelector( '#note' ) );
-	       newEl.toggleClass('col-lg-9');
-	     
-	        });
-	      });
-	    }
-	  };
-	});
+	return {
+		restrict : 'AE',
+		link : function(scope, elem, attrs) {
+
+			elem.on('click', function() {
+
+				$timeout(function() {
+
+					var newEl = angular
+							.element(document.querySelector('#note'));
+					newEl.toggleClass('col-lg-9');
+
+				});
+			});
+		}
+	};
+});
+
+toDo
+		.directive(
+				'editbutton',
+				function() {
+					return {
+						template : ' <input type="submit"'
+								+ 'value="edit" ng-click="editNote(note);close();" class="noteenter">'
+							
+					}
+				})
+
+toDo.directive('trashbutton', function() {
+
+	return {
+		template : ' <i ng-click="trashNote(note);close();"'
+				+ 'class="notetrash glyphicon glyphicon-trash">' + '</i>'
+	}
+})
+
+
+toDo.directive('pinbutton', function() {
+
+	return {
+		template : ' <img src="img/pin.svg" ng-click="pinNote(note);pin=true;"'
+				+ '>' + '</img>'
+	}
+})
+
+
+toDo.directive('pininarchivebutton', function() {
+
+	return {
+		template : ' <img src="img/pin.svg" ng-click="pinNote(note);archiveNote(note);"'
+				+ '>' + '</img>'
+	}
+})
+
+toDo.directive('archiveinpinbutton', function() {
+
+	return {
+		template : ' <img src="img/archive.svg" ng-click="archiveNote(note);pinNote(note);"'
+				+ '>' + '</img>'
+	}
+})
+
+toDo.directive('unarchivebutton', function() {
+
+	return {
+		template : ' <img src="img/unarchive.svg" ng-click="archiveNote(note);"'
+				+ '>' + '</img>'
+	}
+})
+toDo.directive('archivebutton', function() {
+
+	return {
+		template : '<img src="img/archive.svg" ng-click="archiveNote(note);"'
+				+ '>' + '</i>'
+	}
+})

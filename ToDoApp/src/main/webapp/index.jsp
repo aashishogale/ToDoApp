@@ -20,7 +20,8 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular-animate.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
 <script
